@@ -1,0 +1,23 @@
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+}
+
+.modal-item label {
+  flex: 0 0 40px;
+  letter-spacing: 0.2em;
+  display: flex;
+  align-items: center;
+}
+
+.image-updater {
+  display: flex;
+  justify-content: flex-start;
+}

@@ -1,0 +1,35 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #1890ff;
+}
+
+.login-form {
+  height: 450px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.09);
+  border-color: rgba(0,0,0,.09);
+  border: 1px solid #e8e8e8;
+  background-color: #fff;
+}
+
+.login-title {
+  text-align: center;
+  margin: 0;
+}
+
+.login-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-form-button {
+  margin: 0 20px;
+}

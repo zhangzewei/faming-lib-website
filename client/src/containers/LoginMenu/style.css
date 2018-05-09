@@ -1,0 +1,27 @@
+.login-menu {
+  cursor: pointer;
+  width: 64px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease 0.3s;
+}
+
+.login-menu:hover {
+  color: #fff;
+  background: #00142a;
+}
+
+.login-menu_not {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease 0.3s;
+}
+
+.login-menu_not a {
+  padding: 0 10px;
+}
