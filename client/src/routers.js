@@ -9,7 +9,6 @@ import Client from './containers/Client';
 export default () => [
   {
     path: '/',
-    exact: true,
     component: Client
   },
   {
