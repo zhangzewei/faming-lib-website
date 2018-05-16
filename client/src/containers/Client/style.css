@@ -1,0 +1,36 @@
+.client-container {
+  max-width: 1920px;
+  min-width: 1024px;
+  margin: 0 auto;
+  height: auto;
+}
+
+.client-header {
+  height: 200px;
+  background: url('./img/header.jpg') no-repeat center;
+  background-size: 100%;
+}
+
+.client-footer {
+  height: 300px;
+  background: #001529;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .client-container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .client-container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .client-container {
+    width: 1170px;
+  }
+}
