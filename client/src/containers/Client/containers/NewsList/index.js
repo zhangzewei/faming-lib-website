@@ -7,7 +7,7 @@ export default class NewsList extends Component {
   }
   render (){
     console.log(this.props)
-    const { match: { params: { type } } } = this.props;
-    return (`${type}新闻列表`);
+    const { match: { params: { id } } } = this.props;
+    return (`${id}新闻列表`);
   }
 } 
