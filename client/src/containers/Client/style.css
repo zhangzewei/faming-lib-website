@@ -5,7 +5,7 @@
   height: auto;
 }
 
-.client-header {
+.client-header__img {
   height: 200px;
   background: url('./img/header.jpg') no-repeat center;
   background-size: 100%;
@@ -15,6 +15,13 @@
   height: 300px;
   background: #001529;
   color: #fff;
+}
+
+.ant-layout-header {
+  padding: 0;
+  background-color: white;
+  height: auto;
+  line-height: auto;
 }
 
 @media (min-width: 768px) {
