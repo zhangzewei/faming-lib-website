@@ -1,8 +1,15 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class HomePage extends Component {
   render (){
-    return ('主页');
+    return [
+      <section key="section1" >
+        section1
+      </section>,
+      <section key="section2" >
+        section2
+      </section>
+    ];
   }
 } 

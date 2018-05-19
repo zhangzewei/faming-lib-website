@@ -10,4 +10,4 @@ export default class NewsPage extends Component {
     const { match: { params: { id } } } = this.props;
     return (`${id}新闻展示`);
   }
-} 
+}

@@ -43,7 +43,7 @@ class Login extends Component {
                 登录
               </Button>
             </Link>
-            <Link to="/admin/register">
+            <Link to="/register">
               <Button className="login-form-button">
                 注册
               </Button>

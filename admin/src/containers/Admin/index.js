@@ -88,7 +88,7 @@ class App extends Component {
               menus={[
                 {text: '用户管理', link: '/admin/userManage'},
                 {text: '前端页面', link: '/'},
-                {text: '登出', link: '/admin/login'}
+                {text: '登出', link: '/login'}
               ]}
               userAvatar="https://avatars.githubusercontent.com/u/12976145?v=3"
               logined
@@ -103,10 +103,10 @@ class App extends Component {
             }}>
             <Switch>
               <Route path='/admin' exact component={DashBoard} />
-              <Route path='/admin/users' exact component={Users} />
-              <Route path='/admin/orders' exact component={Orders} />
-              <Route path='/admin/goods' exact component={Goods} />
-              <Route path='/admin/users/detail' exact component={UserDetail} />
+              <Route path='/admin/users' component={Users} />
+              <Route path='/admin/orders' component={Orders} />
+              <Route path='/admin/goods' component={Goods} />
+              <Route path='/admin/users/detail' component={UserDetail} />
               <Route component={NotMatch} />
             </Switch>
           </Content>
