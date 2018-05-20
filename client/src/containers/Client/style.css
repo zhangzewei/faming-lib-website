@@ -1,3 +1,11 @@
+.ant-layout{
+  background: #ecebeb;
+}
+.ant-layout-header{
+  background: #ffffff00;
+  background-color: rgba(255, 255, 255, 0);
+}
+
 .client-container {
   max-width: 1920px;
   min-width: 1024px;
@@ -7,7 +15,6 @@
 
 .client-header__img {
   height: 200px;
-  background: url('./img/header.jpg') no-repeat center;
   background-size: 100%;
   margin-bottom: 60px;
   
@@ -52,10 +59,79 @@ ul.client-headerTitle-ul {
   display: inline-block;
 }
 
+.client-headerTitle {
+  position: relative;
+  height: 315px;
+  display: flex;
+  background: url('./img/header.png') no-repeat center;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 15%;
+}
+
+.client-headerTitle .ant-row{
+  background: #ffffff00;
+}
+
+
+ul.client-headerTitle-ul {
+  display: inline-block;
+  position: relative;
+  top: -15px;
+}
+
+ul.client-headerTitle-ul li {
+  height: 41px;
+    font-size: 31px;
+    font-family: 华文行楷;
+    color: #fff;
+    text-align: left;
+
+}
+
+.client-headerLogo{
+  background: url('./img/LOGO.png');
+  width: 118px;
+  height: 118px;
+  background-size: 100%;
+  display: inline-block;
+  margin-right: 9px;
+}
+  
+
+ul.client-headerTitle-ul {
+  display: inline-block;
+}
+
+.client-header.ant-row {
+  display: flex;
+  justify-content: center;
+}
+
+.menu .ant-menu{
+  background: #6c9d2e;
+  margin: 5px 0;
+
+}
+
 
 .client-footer {
   height: 180px;
   background: #535353;
+  color: #fff;
+  position: relative;
+  margin-top: 22px;
+}
+
+
+.footerLink ul {
+  padding: 0 86px;
+  text-align: center;
+}
+
+.client-footer a {
+  color: #fff;
   color: #fff;
   position: relative;
   margin-top: 22px;
@@ -130,6 +206,9 @@ p.footerName-liEinglish {
   text-align: center;
   left: 0;
   bottom: 6px;
+  bottom: 5px;
+  width: 100%;
+  text-align: center;
 }
 
 li.footerInform-li {
