@@ -9,12 +9,112 @@
   height: 200px;
   background: url('./img/header.jpg') no-repeat center;
   background-size: 100%;
+  margin-bottom: 60px;
+  
 }
 
-.client-footer {
-  height: 300px;
-  background: #001529;
+.client-headerTitle {
+  position: relative;
+  height: 212px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 83%;
+  margin: 0 auto;
+}
+
+ul.client-headerTitle-ul {
+  display: inline-block;
+  position: relative;
+  top: -15px;
+}
+
+ul.client-headerTitle-ul li {
+  height: 34px;
+  font-size: 20px;
+  font-family: 华文行楷;
   color: #fff;
+  text-align: left;
+
+}
+
+.client-headerLogo{
+  background: url('./img/LOGO.png');
+  width: 96px;
+  height: 96px;
+  background-size: 100%;
+  display: inline-block;
+  margin-right: 9px;
+}
+  
+
+ul.client-headerTitle-ul {
+  display: inline-block;
+}
+
+
+.client-footer {
+  height: 180px;
+  background: #535353;
+  color: #fff;
+  position: relative;
+  margin-top: 22px;
+}
+
+
+.footerLink ul {
+  padding: 0 86px;
+  text-align: center;
+}
+
+.client-footer a {
+  color: #fff;
+  font-size: 15px;
+}
+
+li.footerLink-list {
+  display: inline-block;
+  width: 16%;
+  text-align: center;
+}
+
+
+
+
+.footerName {
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  margin: 14px 0;
+  display: flex;
+  align-items: center;
+  margin: 14px auto;
+  width: 90%;
+  justify-content: center;
+}
+
+.footerName li {
+  display: inline-block;
+}
+.footerName .footerName-li{
+  width: 28%;
+}
+.footerName .footerName-logo{
+  background: url('./img/LOGO.png');
+  width: 85px;
+  height: 85px;
+  background-size: 100%;
+}
+
+
+p.footerName-liChinese {
+  font-size: 22px;
+    margin: 0;
+    font-family: 华文行楷;
+}
+
+p.footerName-liEinglish {
+  font-size: 11px;
 }
 
 .ant-layout-header {
@@ -22,6 +122,18 @@
   background-color: white;
   height: auto;
   line-height: auto;
+}
+
+.footerInform{
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+li.footerInform-li {
+  display: inline-block;
+  margin: 5px 13px;
 }
 
 @media (min-width: 768px) {
