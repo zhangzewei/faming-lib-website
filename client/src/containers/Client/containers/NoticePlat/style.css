@@ -1,0 +1,17 @@
+.notice-table__header {
+    font-weight: bold;
+    position: relative;
+    background: #5f860a;
+    color: #fff;
+    height: 24px;
+    line-height: 24px;
+    top: -24px;
+    border-radius: 18px 18px 0 0;
+}
+
+span.notice-table-title {
+    display: inline-block;
+    width: 25%;
+    background: yellowgreen;
+    text-align: center;
+}
