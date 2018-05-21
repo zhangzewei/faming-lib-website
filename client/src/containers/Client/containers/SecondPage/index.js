@@ -9,7 +9,7 @@ import NewsList from '../NewsList';
 import FileList from '../FileList';
 
 const menuTypeMap = { // 用来对应的页面的标题
-  shiyanshi: '实验室概况',
+  gaikuang: '实验室概况',
   lingdao: '领导',
   tuandui: '团队介绍',
   jigou: '机构设置',
@@ -43,21 +43,21 @@ const menuTitle = {
 
 export default class SecondPage extends Component {
   static propTypes = {
-    match: PropTypes.object.isRequired
+    match: PropTypes.object.isRequired,
+    state: PropTypes.object.isRequired
   }
-  static contextTypes = {
-    state: PropTypes.object
-  }
+  
   render() {
-    const { match: { params: { pageType, menuType, id } } } = this.props;
+    const { state, match: { params: { pageType, menuType, id } } } = this.props;
     const menuTp = menuType.split(':')[0];
     const menuName = menuType.split(':')[1];
+    const { currentNews } = state.Client.toJS();
+
     return (
       <div className="second-page">
         <Row>
           <Col span={5}>
             <div className='menuTitle'>
-
               {menuTitle[menuTp]}
             </div>
 
@@ -75,7 +75,10 @@ export default class SecondPage extends Component {
               </div>
               <div className="airticle-body">
                 <Switch>
-                  <Route path={`/secondPage/news/${menuType}/:id`} component={NewsPage}/>
+                  <Route
+                    path={`/secondPage/news/${menuType}/:id`}
+                    render={(r) => <NewsPage currentNews={currentNews} {...r} />}
+                  />
                   <Route path={`/secondPage/newsList/${menuType}/:id`} component={NewsList} />
                   <Route path={`/secondPage/fileList/${menuType}/:id`} component={FileList} />
                 </Switch>

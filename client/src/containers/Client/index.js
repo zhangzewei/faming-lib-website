@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link, Route, Switch } from 'react-router-dom';
 import { Layout, Row, Col, Menu } from 'antd';
-import clientAction from './actions';
+import * as clientAction from './actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NewsList from './containers/NewsList';
@@ -41,20 +41,20 @@ const mapDispatchToProps = (dispatch) => {
 class Client extends Component {
 
   static childContextTypes = {
-    state: PropTypes.object
+    actions: PropTypes.object
   }
   
   // 返回Context对象，方法名是约定好的
   getChildContext () {
     return {
-      state: this.props.state
+      actions: this.props.actions
     }
   }
 
   render() {
     return (
       <Layout>
-        <Header className="client-header" >
+        <Header className="client-header" style={{ background: '#ecebeb' }} >
           <div className='client-headerTitle'>
            <div className='client-headerLogo'></div>
             <ul className='client-headerTitle-ul'>
@@ -63,7 +63,7 @@ class Client extends Component {
               <li className='client-headerTitle-list'>成都荞麦产业化工程技术研究中心</li>
             </ul>
           </div>
-          <div className="menu">
+          <div className="menu client-container">
             <Menu
               selectedKeys={[]}
               mode="horizontal"
@@ -109,7 +109,10 @@ class Client extends Component {
         <Content className="client-container">
           <Switch>
             <Route path="/" exact component={HomePage} />
-            <Route path="/secondPage/:pageType/:menuType/:id" component={SecondPage} />
+            <Route
+              path="/secondPage/:pageType/:menuType/:id"
+              render={(r) => <SecondPage state={this.props.state} {...r} />}
+            />
             <Route component={NotMatch} />
           </Switch>
         </Content>

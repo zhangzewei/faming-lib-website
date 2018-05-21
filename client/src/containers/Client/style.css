@@ -154,9 +154,6 @@ li.footerLink-list {
   text-align: center;
 }
 
-
-
-
 .footerName {
   text-align: center;
   display: flex;
@@ -172,16 +169,18 @@ li.footerLink-list {
 .footerName li {
   display: inline-block;
 }
+
 .footerName .footerName-li{
   width: 28%;
 }
+
+
 .footerName .footerName-logo{
   background: url('./img/LOGO.png');
   width: 85px;
   height: 85px;
   background-size: 100%;
 }
-
 
 p.footerName-liChinese {
   font-size: 22px;
@@ -214,6 +213,19 @@ p.footerName-liEinglish {
 li.footerInform-li {
   display: inline-block;
   margin: 5px 13px;
+}
+
+.ant-menu-submenu-title a {
+  color: #333;
+}
+
+.ant-menu-horizontal > .ant-menu-item > a:hover {
+  color: #333;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover,
+.ant-menu-horizontal > .ant-menu-submenu:hover {
+  border-bottom-color: transparent;
 }
 
 @media (min-width: 768px) {
