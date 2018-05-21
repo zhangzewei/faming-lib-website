@@ -79,23 +79,23 @@ class Client extends Component {
                 {LibMenu()}
               </SubMenu>
 
-              <SubMenu title={<Link to="/secondPage/news/ScientificMenu:yanjiu/yanjiu">科研平台</Link>}>
-                {ScientificMenu()}
-              </SubMenu>
-              <SubMenu title={<Link to="/secondPage/newsList/NewsMenu:gongzuo/gongzuo">新闻资讯</Link>}>
-                {NewsMenu()}
-              </SubMenu>
+                    <SubMenu title={<Link to="/secondPage/news/ScientificMenu:yanjiu/yanjiu">科研平台</Link>}>
+                      {ScientificMenu()}
+                    </SubMenu>
+                    <SubMenu title={<Link to="/secondPage/newsList/NewsMenu:gongzuo/gongzuo">新闻资讯</Link>}>
+                      {NewsMenu()}
+                    </SubMenu>
 
-              <SubMenu title={<Link to="/secondPage/news/PeopleMenu:shuoshi/shuoshi">人才培养</Link>}>
-                {PeopleMenu()}
-              </SubMenu>
-              <SubMenu title={<Link to="/secondPage/news/CompareMenu:jiaoliu/jiaoliu">合作交流</Link>}>
-                {CompareMenu()}
-              </SubMenu>
+                    <SubMenu title={<Link to="/secondPage/news/PeopleMenu:shuoshi/shuoshi">人才培养</Link>}>
+                      {PeopleMenu()}
+                    </SubMenu>
+                    <SubMenu title={<Link to="/secondPage/news/CompareMenu:jiaoliu/jiaoliu">合作交流</Link>}>
+                      {CompareMenu()}
+                    </SubMenu>
 
-              <SubMenu title={<Link to="/secondPage/news/PopulationOfscienceMenu:zhuanzai/zhuanzai">科普宣传</Link>}>
-                {PopulationOfscienceMenu()}
-              </SubMenu>
+                    <SubMenu title={<Link to="/secondPage/news/PopulationOfscienceMenu:zhuanzai/zhuanzai">科普宣传</Link>}>
+                      {PopulationOfscienceMenu()}
+                    </SubMenu>
 
               <SubMenu title={<Link to="/secondPage/fileList/FileMenu:wenzhang/wenzhang">资料下载</Link>}>
                 {FileMenu()}

@@ -55,18 +55,20 @@ export default class SecondPage extends Component {
     return (
       <div className="second-page">
         <Row>
-          <Col span={4}>
-            <div>
+          <Col span={5}>
+            <div className='menuTitle'>
+
               {menuTitle[menuTp]}
             </div>
-            <Menu
-              mode="inline"
-              selectedKeys={[`${menuType}`]}
-            >
-              {Menus[menuTp]()}
-            </Menu>
+
+            <div className='menuUl'>
+              <Menu mode="inline"selectedKeys={[`${menuType}`]}>
+                {Menus[menuTp]()}
+              </Menu>
+            </div>
+          
           </Col>
-          <Col span={20}>
+          <Col span={19}>
             <div className="airticle">
               <div className="airticle-header">
                 <span>{menuTypeMap[menuName]}</span>
