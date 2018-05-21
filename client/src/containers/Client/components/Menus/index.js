@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 
 const SubMenu = Menu.SubMenu;
 
-export const LibMenu = () => [ // 实验室概况菜单
+export const LibMenu = () => [ // 实验室概况菜单 
+  <Menu.Item key="LibMenu:shiyanshi">
+    <Link to="/secondPage/news/LibMenu:shiyanshi/shiyanshi">实验室概况</Link>
+  </Menu.Item>,
   <Menu.Item key="LibMenu:lingdao">
     <Link to="/secondPage/news/LibMenu:lingdao/lingdao">领导</Link>
   </Menu.Item>,
@@ -77,9 +80,9 @@ export const PopulationOfscienceMenu = () => (
 
 export const FileMenu = () => [
   <Menu.Item key="FileMenu:wenzhang">
-    <Link to="/secondPage/newsList/FileMenu:wenzhang/wenzhang">文章下载</Link>
+    <Link to="/secondPage/fileList/FileMenu:wenzhang/wenzhang">文章下载</Link>
   </Menu.Item>,
   <Menu.Item key="FileMenu:lunwenxiazai">
-    <Link to="/secondPage/newsList/FileMenu:lunwenxiazai/lunwen">论文下载</Link>
+    <Link to="/secondPage/fileList/FileMenu:lunwenxiazai/lunwen">论文下载</Link>
   </Menu.Item>
 ];

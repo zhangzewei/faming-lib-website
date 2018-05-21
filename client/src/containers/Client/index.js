@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link, Route, Switch } from 'react-router-dom';
 import { Layout, Row, Col, Menu } from 'antd';
+import clientAction from './actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import NewsList from './containers/NewsList';
 import HomePage from './containers/HomePage';
 import NewsPage from './containers/NewsPage';
@@ -23,7 +26,31 @@ import './style.css';
 const { Header, Footer, Sider, Content } = Layout;
 const SubMenu = Menu.SubMenu;
 
-export default class Client extends Component {
+
+const mapStateToProps = (state) => {
+  return {
+    state
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
+
+class Client extends Component {
+
+  static childContextTypes = {
+    state: PropTypes.object
+  }
+  
+  // 返回Context对象，方法名是约定好的
+  getChildContext () {
+    return {
+      state: this.props.state
+    }
+  }
+
   render() {
     return (
       <Layout>
@@ -70,7 +97,7 @@ export default class Client extends Component {
                 {PopulationOfscienceMenu()}
               </SubMenu>
 
-              <SubMenu title={<Link to="/secondPage/newsList/FileMenu:wenzhang/wenzhang">资料下载</Link>}>
+              <SubMenu title={<Link to="/secondPage/fileList/FileMenu:wenzhang/wenzhang">资料下载</Link>}>
                 {FileMenu()}
               </SubMenu>
               <Menu.Item key="admin">
@@ -125,3 +152,5 @@ export default class Client extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Client)

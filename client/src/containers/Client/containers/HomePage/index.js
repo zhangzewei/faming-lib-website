@@ -13,56 +13,56 @@ import ImgSlid from '../ImgSlid'
 import './index.css'
 
 export default class HomePage extends Component {
-  render (){
+  render() {
     return [
       <section key="section1" className="section1 section">
         <Row>
           <Col sm={{ span: 24 }} lg={{ span: 16 }}>
-            <CarouselBox/>
+            <CarouselBox />
           </Col>
           <Col sm={{ span: 24 }} lg={{ span: 8 }}>
             <NewsPlat />
           </Col>
         </Row>
       </section>,
-      <section key="section2"  className='section2'>
+      <section key="section2" className='section2'>
         <div className='section2-header'></div>
-      <Row>
+        <Row>
           <Col sm={{ span: 24 }} lg={{ span: 5 }}>
             <LoadPlat />
           </Col>
           <Col sm={{ span: 24 }} lg={{ span: 11 }}>
-            <ShowPlat/>
+            <ShowPlat />
           </Col>
           <Col sm={{ span: 24 }} lg={{ span: 8 }}>
-           <NoticePlat/>
+            <NoticePlat />
           </Col>
-          
+
         </Row>
       </section>,
       <section key="section3" >
-        <ImgSlid/>
+        <ImgSlid />
       </section>,
       <section key="section4" className='section4' >
-        <Row> 
+        <Row>
           <Col className='teamTitle' sm={{ span: 4 }} lg={{ span: 4 }}>创新团队</Col>
-          <Col className='teamTitle-line'sm={{ span: 20 }} lg={{ span: 20 }}></Col>
+          <Col className='teamTitle-line' sm={{ span: 20 }} lg={{ span: 20 }}></Col>
         </Row>
         <Row>
-            
-            <Col sm={{ span: 24 }} lg={{ span: 16 }}>
-              <ShowPlat/>
-            </Col>
-            <Col sm={{ span: 24 }} lg={{ span: 8 }}>
-              <ButtonList />
-            </Col>
-            
-          </Row>
-          <Row>
-            <Col sm={{ span: 48 }} lg={{ span: 24 }}>
-              <LinkList/>
-            </Col>
-          </Row>
+
+          <Col sm={{ span: 24 }} lg={{ span: 16 }}>
+            <ShowPlat />
+          </Col>
+          <Col sm={{ span: 24 }} lg={{ span: 8 }}>
+            <ButtonList />
+          </Col>
+
+        </Row>
+        <Row>
+          <Col sm={{ span: 48 }} lg={{ span: 24 }}>
+            <LinkList />
+          </Col>
+        </Row>
       </section>
     ];
   }

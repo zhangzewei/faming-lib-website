@@ -126,9 +126,10 @@ p.footerName-liEinglish {
 
 .footerInform{
   position: absolute;
-  bottom: 5px;
-  width: 100%;
+  right: 0;
   text-align: center;
+  left: 0;
+  bottom: 6px;
 }
 
 li.footerInform-li {

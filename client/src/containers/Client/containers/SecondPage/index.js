@@ -6,8 +6,10 @@ import * as Menus from '../../components/Menus';
 import './style.css';
 import NewsPage from '../NewsPage';
 import NewsList from '../NewsList';
+import FileList from '../FileList';
 
 const menuTypeMap = { // 用来对应的页面的标题
+  shiyanshi: '实验室概况',
   lingdao: '领导',
   tuandui: '团队介绍',
   jigou: '机构设置',
@@ -43,6 +45,9 @@ export default class SecondPage extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired
   }
+  static contextTypes = {
+    state: PropTypes.object
+  }
   render() {
     const { match: { params: { pageType, menuType, id } } } = this.props;
     const menuTp = menuType.split(':')[0];
@@ -70,6 +75,7 @@ export default class SecondPage extends Component {
                 <Switch>
                   <Route path={`/secondPage/news/${menuType}/:id`} component={NewsPage}/>
                   <Route path={`/secondPage/newsList/${menuType}/:id`} component={NewsList} />
+                  <Route path={`/secondPage/fileList/${menuType}/:id`} component={FileList} />
                 </Switch>
               </div>
             </div>
