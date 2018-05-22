@@ -17,6 +17,7 @@
     font-size: 23px;
     color: #FFF;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .buttonList-item a{

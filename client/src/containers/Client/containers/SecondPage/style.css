@@ -89,3 +89,11 @@
 .menuUl li div.ant-menu-submenu-title a {
   margin-left: 18px
 }
+.menuUl li .ant-menu-item > a{
+  color: #fff;
+
+}
+
+.menuUl li div.ant-menu-submenu-title a {
+  margin-left: 18px
+}

@@ -40,6 +40,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: bold;
 }
 
 .news-more {
@@ -66,15 +67,22 @@ ul.table-list .news-top{
     justify-content: flex-start;
 }
 ul.table-list li span.list-top-title {
-    flex: 0 0 340px;
+    width: 321px;
+    height: 32px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    font-size: 40px; 
+    font-size: 26px;
     justify-content: flex-start;
-    padding-left:8px;
+    padding-left: 8px;
+    font-weight: bold;
 }
 ul.table-list .news-top.news-more{
     position: absolute;
     bottom: 13px;
     right: 0px;
+}
+
+a.list-title {
+    color: #433838;
 }
