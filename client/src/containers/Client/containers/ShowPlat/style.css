@@ -16,6 +16,13 @@
     color: black;
      box-shadow: 0px 1px 0px 0px #d6c7c7;
     border-left: solid 14px #f19149;
+    align-items: end;
+}
+
+li.list-show img {
+    width: 20%;
+    height: 93%;
+    margin: 5px 6px 0 0;
 }
 
 span.list-showConent {

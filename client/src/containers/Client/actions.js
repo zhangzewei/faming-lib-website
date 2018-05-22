@@ -5,8 +5,9 @@ export const actionTypes = {
 }
 
 export const getCurrentNews = (newsId) => {
+  const article = articles[newsId] || { title: '', msg: '' };
   return {
     type: actionTypes.GET_CURRENT_NEWS,
-    article: articles[newsId],
+    article,
   }
 }

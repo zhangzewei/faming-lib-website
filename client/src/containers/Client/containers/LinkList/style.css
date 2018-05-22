@@ -21,6 +21,16 @@ li.linkList-li {
     font-weight: bold;
 }
 
+ul.linkList-ul {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 0;
+}
+
+li.linkList-li img {
+    width: 100%;
+}
+
 li.linkLine {
     width: 80%;
     border-top: solid 4px #528647;

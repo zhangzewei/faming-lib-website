@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-
-
 import './style.css';
+
+import linkImg1 from './img/linkImg (1).png'
+import linkImg2 from './img/linkImg (2).png'
+import linkImg3 from './img/linkImg (3).png'
+import linkImg4 from './img/linkImg (4).png'
+import linkImg5 from './img/linkImg (5).png'
 
 export default class LinkList extends Component {
 
@@ -19,14 +23,13 @@ export default class LinkList extends Component {
                     <li className='linkLine'></li>
                 </div>
                 <ul className='linkList-ul'>
-                    <li className='linkList-li'><a href=""><img className='' src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1431320882,4227826368&fm=27&gp=0.jpg" alt="" /></a></li>
-                    <li className='linkList-li'><a href=""><img className='' src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1431320882,4227826368&fm=27&gp=0.jpg" alt="" /></a></li>
-                    <li className='linkList-li'><a href=""><img className='' src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1431320882,4227826368&fm=27&gp=0.jpg" alt="" /></a></li>
-                    <li className='linkList-li'><a href=""><img className='' src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1431320882,4227826368&fm=27&gp=0.jpg" alt="" /></a></li>
-                    <li className='linkList-li'><a href=""><img className='' src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1431320882,4227826368&fm=27&gp=0.jpg" alt="" /></a></li>
-                    <li className='linkList-li'><a href=""><img className='' src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1431320882,4227826368&fm=27&gp=0.jpg" alt="" /></a></li>
+                    <li className='linkList-li'><a href=""><img className='' src={linkImg1} alt="" /></a></li>
+                    <li className='linkList-li'><a href=""><img className='' src={linkImg2} alt="" /></a></li>
+                    <li className='linkList-li'><a href=""><img className='' src={linkImg3} alt="" /></a></li>
+                    <li className='linkList-li'><a href=""><img className='' src={linkImg4} alt="" /></a></li>
+                    <li className='linkList-li'><a href=""><img className='' src={linkImg5} alt="" /></a></li>
                 </ul>
             </div>
-        )
+        )     
     }
 }

@@ -12,10 +12,10 @@ export default class ButtonList extends Component {
       return (
        <div className='buttonList'>
            <ul className='buttonList-ul'>
-               <li className='buttonList-item'><Link to='/'>实验室概况</Link></li>
-               <li className='buttonList-item'><Link to='/'>科研平台</Link></li>
-               <li className='buttonList-item'><Link to='/'>人才培养</Link></li>
-               <li className='buttonList-item'><Link to='/'>合作交流</Link></li>
+            <Link to='/secondPage/news/LibMenu:shiyanshi/shiyanshi'><li className='buttonList-item'>实验室概况</li></Link>
+            <Link to='/secondPage/news/ScientificMenu:yanjiu/yanjiu'><li className='buttonList-item'>科研平台</li></Link>
+            <Link to='/secondPage/news/PeopleMenu:shuoshi/shuoshi'><li className='buttonList-item'>人才培养</li></Link>
+            <Link to='/secondPage/news/CompareMenu:jiaoliu/jiaoliu'><li className='buttonList-item'>合作交流</li></Link>
            </ul>
        </div>
       )

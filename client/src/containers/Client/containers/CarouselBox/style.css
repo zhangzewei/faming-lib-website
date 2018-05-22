@@ -7,10 +7,44 @@
     overflow: hidden;
   }
   
-  .ant-carousel .slick-slide h3 {
+.ant-carousel .slick-slide h3 {
     color: #fff;
   }
 
-  .Carousel{
+.Carousel{
       margin-right: 15px;
   }
+
+.ant-carousel .slick-slide img {
+    display: block;
+    width: 100%;
+}
+
+.autoplay.ant-carousel .slick-slide{
+  height: 418px;
+}
+
+.ant-carousel .slick-initialized .slick-slide{
+  height: 418px;
+}
+
+.ant-carousel .slick-dots li button{
+  width: 54px;
+  height: 6px;
+}
+
+.ant-carousel .slick-dots{
+  padding: 15px 0;
+  bottom: -4px;
+  list-style: none;
+  display: block;
+  text-align: center;
+  height: 35px;
+  margin: 0;
+  width: 100%;
+  background-color: #222020b0;
+}
+
+.slick-active li button{
+  background: rgb(211, 102, 29);
+}
