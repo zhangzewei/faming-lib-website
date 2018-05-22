@@ -11,7 +11,7 @@ const initState = fromJS({
 export default (state = initState, action) => {
   switch (action.type) {
     case actionTypes.GET_CURRENT_NEWS:
-      return state.update('currentNews', () => action.article);
+      return state.update('currentNews', () => fromJS(action.article));
     default: return state;
   }
 }

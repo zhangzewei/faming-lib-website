@@ -13,15 +13,32 @@ export default class NewsPage extends Component {
     actions: PropTypes.object
   }
 
+  constructor() {
+    super();
+    this.state = {
+      oldId: ''
+    }
+  }
+
+  componentWillReceiveProps() {
+    const { currentNews, match: { params: { id } } } = this.props;
+    this.setState({ oldId: id });
+    this.articleBody.innerHTML = currentNews.msg || '暂无';
+  }
+
   componentDidMount() {
     const { currentNews, match: { params: { id } } } = this.props;
     this.context.actions.getCurrentNews(id);
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { match: { params: { id } } } = nextProps;
+    return id !== this.state.oldId;
+  }
+
   componentDidUpdate() {
-    const { currentNews, match: { params: { id } } } = this.props;
+    const { match: { params: { id } } } = this.props;
     this.context.actions.getCurrentNews(id);
-    this.articleBody.innerHTML = currentNews.msg;
   }
 
   render (){
@@ -29,7 +46,7 @@ export default class NewsPage extends Component {
     return (
       <div className="news-article">
         <div className="news-article__header">
-          <h2>{currentNews.title}</h2>
+          <h2>{currentNews.title || '暂无'}</h2>
         </div>
         <div
           className="news-article__body"
