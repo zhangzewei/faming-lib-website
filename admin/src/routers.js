@@ -7,7 +7,7 @@ import Register from './containers/Login/register';
 
 export default () => [
   {
-    path: '/login',
+    path: '/',
     exact: true,
     component: Login
   },

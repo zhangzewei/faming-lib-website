@@ -10,6 +10,7 @@ import NotMatch from '../NotMatch';
 import UserDetail from '../Users/detail';
 
 import './style.css';
+import NewsEditer from '../NewsEditer';
 
 const { Header, Sider, Content } = Layout;
 
@@ -40,9 +41,9 @@ class App extends Component {
           </Link>
         </Menu.Item>
         <Menu.Item key="goods">
-          <Link to="/admin/goods">
+          <Link to="/admin/newsEdit">
             <Icon type="video-camera" />
-            <span>货物管理</span>
+            <span>新闻编辑</span>
           </Link>
         </Menu.Item>
         <Menu.Item key="orders">
@@ -104,7 +105,7 @@ class App extends Component {
             <Switch>
               <Route path='/admin' exact component={DashBoard} />
               <Route path='/admin/users' component={Users} />
-              <Route path='/admin/orders' component={Orders} />
+              <Route path='/admin/newsEdit' component={NewsEditer} />
               <Route path='/admin/goods' component={Goods} />
               <Route path='/admin/users/detail' component={UserDetail} />
               <Route component={NotMatch} />
