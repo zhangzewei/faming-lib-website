@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import { Route, Link, Switch } from 'react-router-dom';
+import * as clientAction from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import LoginMenu from '../LoginMenu';
 import DashBoard from '../DashBoard';
-import Users from '../Users';
-import Orders from '../Orders';
-import Goods from '../Goods';
+import NewsList from '../NewsList';
+import FileList from '../FileList';
 import NotMatch from '../NotMatch';
-import UserDetail from '../Users/detail';
-
-import './style.css';
 import NewsEditer from '../NewsEditer';
 
+import './style.css';
+
 const { Header, Sider, Content } = Layout;
+
+const mapStateToProps = (state) => {
+  return {
+    state
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
 
 class App extends Component {
   state = {
@@ -40,16 +52,16 @@ class App extends Component {
             <span>仪表盘</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="goods">
-          <Link to="/admin/newsEdit">
+        <Menu.Item key="newsList">
+          <Link to="/admin/newsList">
             <Icon type="video-camera" />
-            <span>新闻编辑</span>
+            <span>新闻列表</span>
           </Link>
         </Menu.Item>
-        <Menu.Item key="orders">
-          <Link to="/admin/orders">
+        <Menu.Item key="fileList">
+          <Link to="/admin/fileList">
             <Icon type="upload" />
-            <span>订单管理</span>
+            <span>文件列表</span>
           </Link>
         </Menu.Item>
         <Menu.Item key="users">
@@ -87,9 +99,7 @@ class App extends Component {
           >
             <LoginMenu
               menus={[
-                {text: '用户管理', link: '/admin/userManage'},
-                {text: '前端页面', link: '/'},
-                {text: '登出', link: '/login'}
+                {text: '登出', link: '/'}
               ]}
               userAvatar="https://avatars.githubusercontent.com/u/12976145?v=3"
               logined
@@ -99,15 +109,14 @@ class App extends Component {
               margin: '24px 16px',
               padding: 24, 
               background: '#fff', 
-              minHeight: 280, 
+              minHeight: 280,
               height: '100%',
             }}>
             <Switch>
               <Route path='/admin' exact component={DashBoard} />
-              <Route path='/admin/users' component={Users} />
-              <Route path='/admin/newsEdit' component={NewsEditer} />
-              <Route path='/admin/goods' component={Goods} />
-              <Route path='/admin/users/detail' component={UserDetail} />
+              <Route path='/admin/newsList' exact component={NewsList} />
+              <Route path='/admin/fileList' exact component={FileList} />
+              <Route path='/admin/newsEdit' exact component={NewsEditer} />
               <Route component={NotMatch} />
             </Switch>
           </Content>
@@ -117,4 +126,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App)

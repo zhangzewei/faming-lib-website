@@ -1,0 +1,12 @@
+.news-table {
+  padding: 20px;
+}
+
+.news-table_action {
+  margin-bottom: 20px;
+}
+
+.list-action {
+  display: flex;
+  justify-content: space-around;
+}

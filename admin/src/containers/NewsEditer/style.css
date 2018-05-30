@@ -1,0 +1,15 @@
+.news-editer .fr-element {
+  max-height: 25rem !important;
+  overflow: auto !important;
+}
+
+.editer-item {
+  margin: 10px 0;
+}
+
+.editer-item label {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
