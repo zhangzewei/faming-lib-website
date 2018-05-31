@@ -13,6 +13,10 @@
   height: auto;
 }
 
+.client-header{
+  position: relative;
+}
+
 .client-header__img {
   height: 200px;
   background-size: 100%;
@@ -40,16 +44,17 @@ ul.client-headerTitle-ul {
 ul.client-headerTitle-ul li {
   height: 34px;
   font-size: 20px;
-  font-family: 华文行楷;
   color: #fff;
+  text-align: left;    height: 41px;
+  font-size: 25px;
   text-align: left;
-
+  font-family: cursive;
 }
 
 .client-headerLogo{
   background: url('./img/LOGO.png');
-  width: 96px;
-  height: 96px;
+  width: 118px;
+  height: 118px;
   background-size: 100%;
   display: inline-block;
   margin-right: 9px;
@@ -69,6 +74,10 @@ ul.client-headerTitle-ul {
   justify-content: flex-start;
   width: 100%;
   padding-left: 15%;
+  position: relative;
+  align-items: center;
+  margin: 0 auto;
+  background-size: contain;
 }
 
 .client-headerTitle .ant-row{
@@ -84,11 +93,22 @@ ul.client-headerTitle-ul {
 
 ul.client-headerTitle-ul li {
   height: 41px;
-    font-size: 31px;
-    font-family: 华文行楷;
-    color: #fff;
-    text-align: left;
+  font-size: 25px;
+  text-align: left;
+  font-family: cursive;
+  border-bottom: 2px solid #6c7b4c;
+  height: 51px;
+  line-height: 64px;
+}
 
+li.client-headerTitle-list.ch-list1 {
+  margin-left: -1px;
+}
+.client-headerTitle-list.ch-list2 {
+  margin-left: 32px;
+}
+li.client-headerTitle-list.ch-list3 {
+  margin-left: 78px;
 }
 
 .client-headerLogo{
@@ -99,7 +119,37 @@ ul.client-headerTitle-ul li {
   display: inline-block;
   margin-right: 9px;
 }
+
+.rightcon {
+  width: 13%;
+  position: absolute;
+  bottom: 99px;
+  right: 84px;
+  height: 26px;
+}
+
+.rightcon li{
+  display: inline-block;
+  width: 50%;
+  height: 26px;
+  background-size: contain;
+  text-align: center;
+  line-height: 31px;
+
+}
+
+.rightcon li a{
+  color:#535353;
+}
+
+.rightcon .rightcon-li1{
+  background-image: url('./img/indexList(1).png');
   
+}
+
+.rightcon .rightcon-li2{
+  background-image: url('./img/indexList(2).png');
+}
 
 ul.client-headerTitle-ul {
   display: inline-block;
@@ -111,11 +161,18 @@ ul.client-headerTitle-ul {
 }
 
 .menu .ant-menu{
-  background: #6c9d2e;
   margin: 5px 0;
+  background-image:url('./img/nav_03.png');
+  background-size: contain;
 
 }
-
+.ant-menu-submenu-title a {
+  color: #dee6e5;
+}
+.ant-menu-horizontal > .ant-menu-item > a {
+  display: block;
+  color: rgb(208, 222, 216);
+}
 
 .client-footer {
   height: 180px;
@@ -215,13 +272,13 @@ li.footerInform-li {
   display: inline-block;
   margin: 5px 13px;
 }
-
-.ant-menu-submenu-title a {
-  color: #333;
+li.ant-menu-item {
+  padding: 14px 20px 0px 20px;
+  color: #dfe6e5;
+  
 }
-
-.ant-menu-horizontal > .ant-menu-item > a:hover {
-  color: #333;
+.ant-menu-submenu-title{
+  padding: 14px 20px 0px 20px;
 }
 
 .ant-menu-horizontal > .ant-menu-item:hover,

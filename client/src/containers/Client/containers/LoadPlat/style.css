@@ -1,85 +1,11 @@
-.loadPlatBox {
-    margin-top: 21px;
+.dangjian{
+        border-top: 25px solid #eee;
+        border-bottom: 25px solid #eee;
+        margin: 13px 0;
+        padding: 9px 0;
+        border-radius: 0px 0px 20px 20px;
+}
+
+.dangjian img {
     width: 100%;
-    
-}
-
-.loadPlatBox span.line{
-    width: 100%;
-    height: 3px;
-    background: #88b130;
-    margin-bottom: 8px;
-    display: block;
-}
-
-.loadPlat{
-    background: #d8f3b1;
-    text-align: center;
-    height: 390px;
-}
-
-.loadPlat-header{
-    background: #416939;
-    font-size: 10px;
-    font-weight: bold;
-    color: #fff;
-}
-
-.loadPlat-header .header-name{
-    background: #528647;
-    height: 26px;
-    text-align: center;
-    line-height: 26px;
-    font-size: 13px;
-}
-
-.loadPlat-header .header-title{
-    font-size: 15px;
-    height: 38px;
-}
-
-.loadForm{
-    padding: 29px 20px 30px 20px;
-    text-align: center;
-    position: relative;
-    height: 260px;
-}
-
-.loadForm .formList {
-    margin: 30px 0;
-    position: relative;
-    height: 50px;
-  
-}
-
-.loadForm .formList label{
-    position: absolute;
-    left: 2px;
-    bottom: 54px;
-    font-weight: bold;
-}
-
-.loadForm .formList .inputList{
-    display: flex;
-    align-items: center;
-}
-
-.loadForm .formList .formList-input{
-    border-radius: 11px;
-    height: 31px;
-    width: 82%;
-}
-.loadForm .loadButton {
-    width: 50%;
-    padding: 5px 20px;
-    background: #c99d10;
-    width: 74%;
-    border-radius: 9px;
-    box-shadow: 0px 3px #6b5505;
-    color: #6b5505;
-    font-size: 14px;
-    font-weight: bold;
-    position: absolute;
-    bottom: 6px;
-    right: 25px;
 }

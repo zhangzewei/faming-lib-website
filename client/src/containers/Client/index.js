@@ -55,14 +55,21 @@ class Client extends Component {
     return (
       <Layout>
         <Header className="client-header" style={{ background: '#ecebeb' }} >
+        
           <div className='client-headerTitle'>
            <div className='client-headerLogo'></div>
             <ul className='client-headerTitle-ul'>
-              <li className='client-headerTitle-list'>农业部杂粮加工重点实验室</li>
-              <li className='client-headerTitle-list'>国家杂粮加工技术研发中心</li>
-              <li className='client-headerTitle-list'>成都荞麦产业化工程技术研究中心</li>
+              <li className='client-headerTitle-list .ch-list1'>农业部杂粮加工重点实验室</li>
+              <li className='client-headerTitle-list .ch-list2'>国家杂粮加工技术研发中心</li>
+              <li className='client-headerTitle-list .ch-list3'>成都荞麦产业化工程技术研究中心</li>
             </ul>
           </div>
+
+          <div className='rightcon'>
+            <li className='rightcon-li1'><Link to="/">首页</Link></li>
+            <li className='rightcon-li2'><Link to="/">联系我们</Link></li>
+          </div>
+
           <div className="menu client-container">
             <Menu
               selectedKeys={[]}
