@@ -12,6 +12,8 @@ import NotMatch from '../NotMatch';
 import NewsEditer from '../NewsEditer';
 import Users from '../Users';
 import UserDetails from '../Users/detail';
+import Pictures from '../Pictures';
+import PicDetails from '../Pictures/detail';
 
 import './style.css';
 
@@ -50,7 +52,7 @@ class App extends Component {
       >
         <Menu.Item key="dashboard">
           <Link to="/admin">
-            <Icon type="user" />
+            <Icon type="bars" />
             <span>仪表盘</span>
           </Link>
         </Menu.Item>
@@ -70,6 +72,12 @@ class App extends Component {
           <Link to="/admin/users">
             <Icon type="user" />
             <span>用户管理</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="pictures">
+          <Link to="/admin/pictures">
+            <Icon type="picture" />
+            <span>轮播图管理</span>
           </Link>
         </Menu.Item>
       </Menu>
@@ -121,6 +129,8 @@ class App extends Component {
               <Route path='/admin/newsEdit' exact component={NewsEditer} />
               <Route path='/admin/users' exact component={Users} />
               <Route path='/admin/useredit' exact component={UserDetails} />
+              <Route path='/admin/pictures' exact component={Pictures} />
+              <Route path='/admin/picEdit' exact component={PicDetails} />
               <Route component={NotMatch} />
             </Switch>
           </Content>
