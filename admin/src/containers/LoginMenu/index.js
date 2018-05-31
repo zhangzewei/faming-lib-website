@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Avatar, Dropdown, Menu } from 'antd';
+import { Dropdown, Menu } from 'antd';
 
 import './style.css';
 
 class LoginMenu extends Component {
   static propTypes = {
     logined: PropTypes.bool.isRequired,
-    userInfo: PropTypes.object.isRequired,
+    userName: PropTypes.string,
     classNames: PropTypes.string,
     loginPage: PropTypes.string,
     menus: PropTypes.array,
   }
 
   renderWithLogin = () => {
-    const { userAvatar, menus, classNames } = this.props;
+    const { userName, menus, classNames } = this.props;
     const className = `login-menu ${classNames || ''}`;
     let M = (<Menu.Item disabled key="disabled_1">没有菜单</Menu.Item>);
     if (menus && menus.length) {
@@ -24,16 +24,13 @@ class LoginMenu extends Component {
       );
     }
     const menu = (<Menu>{M}</Menu>);
-    const UserAvatar = userAvatar
-      ? <Avatar src={userAvatar} />
-      : <Avatar icon="user" />;
     return (
       <Dropdown
         overlay={menu}
         trigger={['hover']}
       >
         <div className={className}>
-          {UserAvatar}
+          您好，{userName || '管理员'}
         </div>
       </Dropdown>
     );

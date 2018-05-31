@@ -1,6 +1,6 @@
 .login-menu {
   cursor: pointer;
-  width: 64px;
+  padding: 0 10px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
 
 .login-menu:hover {
   color: #fff;
-  background: #00142a;
+  background: #059ff136;
 }
 
 .login-menu_not {

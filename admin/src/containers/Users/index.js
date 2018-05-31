@@ -16,6 +16,7 @@ class Users extends Component {
         style={{ width: 300 }}
         placeholder="请输入搜索文字"
       />
+      <Button style={{ float: 'right' }}><Link to="/admin/userEdit">新增用户</Link></Button>
     </div>
   );
 
@@ -24,19 +25,25 @@ class Users extends Component {
       title: '用户名',
       dataIndex: 'userName',
     }, {
-      title: '密码',
-      dataIndex: 'passWord',
-    }, {
       title: '操作',
       render: (_, record) => (
-        <Button onClick={() => this.deleteUser(record)}>删除</Button>
+        <div className="list-action">
+          <Button>编辑</Button>
+          <Button type="danger" onClick={() => this.deleteUser(record)}>删除</Button>
+        </div>
+        
       )
     }];
-    let data = [];
+    let data = [
+      {
+        key: 'u1',
+        userName: 'hahah'
+      }
+    ];
     return (
       <Table
         columns={columns}
-        data={data}
+        dataSource={data}
         title={() => this.renderTableHeader()}
       />
     )

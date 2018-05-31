@@ -10,6 +10,8 @@ import NewsList from '../NewsList';
 import FileList from '../FileList';
 import NotMatch from '../NotMatch';
 import NewsEditer from '../NewsEditer';
+import Users from '../Users';
+import UserDetails from '../Users/detail';
 
 import './style.css';
 
@@ -101,7 +103,7 @@ class App extends Component {
               menus={[
                 {text: '登出', link: '/'}
               ]}
-              userAvatar="https://avatars.githubusercontent.com/u/12976145?v=3"
+              userName="张胖胖"
               logined
             />
           </Header>
@@ -117,6 +119,8 @@ class App extends Component {
               <Route path='/admin/newsList' exact component={NewsList} />
               <Route path='/admin/fileList' exact component={FileList} />
               <Route path='/admin/newsEdit' exact component={NewsEditer} />
+              <Route path='/admin/users' exact component={Users} />
+              <Route path='/admin/useredit' exact component={UserDetails} />
               <Route component={NotMatch} />
             </Switch>
           </Content>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Button, Modal } from 'antd';
+import { Table, Button, Modal, Upload, message, Icon, Input} from 'antd';
 import { Link } from 'react-router-dom';
 
 export default class FileList extends Component {
@@ -28,6 +28,22 @@ export default class FileList extends Component {
     }
   }
 
+  renderTableHeader = () => (
+    <div className="table-header">
+      <h2>文件列表</h2>
+      <Input.Search
+        style={{ width: 300 }}
+        placeholder="请输入搜索文字"
+      />
+      <Button
+        style={{ float: 'right' }}
+        onClick={() => this.setState({
+          showFileUploader: true,
+        })}
+      >上传文件</Button>
+    </div>
+  );
+
   render (){
     const { list } = this.props;
     const col = [
@@ -49,24 +65,43 @@ export default class FileList extends Component {
         )
       }
     ];
+    
+    const uploadProps = {
+      name: 'file',
+      action: '//jsonplaceholder.typicode.com/posts/',
+      headers: {
+        authorization: 'authorization-text',
+      },
+      onChange(info) {
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      },
+    }
 
     return (
       <div className="news-table">
-        <div className="news-table_action">
-          <Button
-            onClick={() => this.setState({
-              showFileUploader: true,
-            })}
-          >上传文件</Button>
-        </div>
-        <Table dataSource={list} columns={col} />
+        <Table
+          dataSource={list}
+          columns={col}
+          title={() => this.renderTableHeader()}
+        />
         <Modal
           visible={this.state.showFileUploader}
           onCancel={() => this.setState({ showFileUploader: false })}
           okText="上传"
           cancelText="取消"
         >
-          上传文件
+          <Upload {...uploadProps}>
+            <Button>
+              <Icon type="upload" /> Click to Upload
+            </Button>
+          </Upload>
         </Modal>
       </div>
     );

@@ -1,24 +1,15 @@
 .user-detail__container {
-  display: flex;
-  justify-content: flex-start;
+  display: block;
 }
 
-.user-detail__hearder {
+.user-details_item {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  height: 150px;
-}
-
-.user-avatar {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80px;
 }
 
 .user-details {
-  padding-left: 30px;
   width: 100%;
   height: 100%;
   display: flex;

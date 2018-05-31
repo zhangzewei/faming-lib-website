@@ -7,7 +7,7 @@
   margin: 10px 0;
 }
 
-.editer-item label {
+.editer-item .editer-item_title {
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;

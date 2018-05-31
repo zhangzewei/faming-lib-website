@@ -31,14 +31,14 @@ export default class NewsEditer extends Component {
     return (
       <div className="news-editer__container">
         <div className="editer-item">
-          <label>
-            新闻标题 
-            <Button>发布新闻</Button>
-          </label>
+          <div className="editer-item_title">
+            <span>新闻标题</span> 
+            <Button onClick={() => console.log(111)}>发布新闻</Button>
+          </div>
           <Input value={this.state.title} />  
         </div>
         <div className="editer-item">
-          <label>新闻内容</label>
+          <div className="editer-item_title">新闻内容</div>
           <FroalaEditor
             tag='textarea'
             model={this.state.article}

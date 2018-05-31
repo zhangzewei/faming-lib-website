@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Table, Button } from 'antd';
+import { Table, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import './style.css'
 
@@ -27,6 +27,19 @@ export default class NewsList extends Component {
     ]
   }
 
+  renderTableHeader = () => (
+    <div className="table-header">
+      <h2>新闻列表</h2>
+      <Input.Search
+        style={{ width: 300 }}
+        placeholder="请输入搜索文字"
+      />
+      <Button
+        style={{ float: 'right' }}
+      ><Link to="/admin/newsEdit">发布文章</Link></Button>
+    </div>
+  );
+
   render (){
     const { match: { params: { id } }, list } = this.props;
     const col = [
@@ -42,7 +55,7 @@ export default class NewsList extends Component {
         width: '200px',
         render: () => (
           <div className="list-action">
-            <Button>下载</Button>
+            <Button>编辑</Button>
             <Button type="danger">删除</Button>
           </div>
         )
@@ -51,10 +64,11 @@ export default class NewsList extends Component {
 
     return (
       <div className="news-table">
-        <div className="news-table_action">
-          <Button><Link to="/admin/newsEdit">发布文章</Link></Button>
-        </div>
-        <Table dataSource={list} columns={col} />
+        <Table
+          dataSource={list}
+          columns={col}
+          title={() => this.renderTableHeader()}
+        />
       </div>
     );
   }
