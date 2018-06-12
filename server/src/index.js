@@ -19,7 +19,7 @@ const init = async () => {
       {
         plugin: require('hapi-router'),
         options: {
-          routes: 'server/routers.js'
+          routes: 'src/routers.js'
         }
       }
     ])

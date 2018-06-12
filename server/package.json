@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon ./server/index.js --exec babel-node",
-    "create-db": "babel-node ./server/db_command/createDB.js"
+    "server": "nodemon ./src/index.js --exec babel-node",
+    "createDB": "babel-node ./src/db_command/createDB.js"
   },
   "author": "",
   "license": "ISC",

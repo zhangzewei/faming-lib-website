@@ -24,13 +24,22 @@ const deleteBulks = (delIds, index) => delIds.map(delId => ({
   delete: { _index: index, _type: 'data', _id: delId }
 }));
 
-const resolveMultiResults = resultObj => {
+export const resolveMultiResults = resultObj => {
   const hits = _get(resultObj, ['hits', 'hits']);
   return hits.map(hit => ({
     id: _get(hit, ['_id']),
     ..._get(hit, ['_source'])
   }));
 }
+
+export const genMatchQuery = filter => ({
+  [Object.keys(filter)[0]]: {
+    query: filter[Object.keys(filter)[0]],
+    fuzziness: 'AUTO',
+    operator: 'and',
+    zero_terms_query: 'all'
+  }
+})
 
 export const insetOneToBD = async ({
   index,
@@ -60,6 +69,7 @@ export const getOneFromBD = async ({
   index,
   id
 }) => {
+  console.log(id)
   try {
     const resp = await DB.get({
       index,
@@ -69,7 +79,10 @@ export const getOneFromBD = async ({
     const _source = _get(resp, ['_source'], null);
     if (_source) return {
       res: 'success',
-      msg: _source
+      msg: {
+        id,
+        ..._source
+      }
     };
     return {
       res: 'error',
@@ -186,6 +199,31 @@ export const addOneToDBWithoutId = async (doc, index) => {
     return {
       res: 'success',
       msg: resp,
+    }
+  } catch(err) {
+    return {
+      res: 'error',
+      msg: err
+    }
+  }
+}
+
+export const getResultsByMatch = async (index, matchFilter) => {
+  try {
+    const resp = await DB.search({
+      index,
+      type: 'data',
+      body: {
+        query: {
+          match: {
+            ...genMatchQuery(matchFilter)
+          }
+        }
+      }
+    });
+    return {
+      res: 'success',
+      msg: resolveMultiResults(resp),
     }
   } catch(err) {
     return {
