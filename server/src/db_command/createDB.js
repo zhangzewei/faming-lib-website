@@ -16,3 +16,8 @@ DB.indices.create({
 DB.indices.create({
   index: 'user',
 });
+
+// 轮播图库
+DB.indices.create({
+  index: 'carrousel',
+});

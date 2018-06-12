@@ -1,9 +1,11 @@
 import News from './news';
 import Files from './files';
 import Users from './users';
+import Carrousel from './carrousel';
 
 export default [
   ...News,
   ...Files,
-  ...Users
+  ...Users,
+  ...Carrousel
 ];
