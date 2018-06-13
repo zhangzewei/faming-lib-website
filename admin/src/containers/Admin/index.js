@@ -19,9 +19,9 @@ import './style.css';
 
 const { Header, Sider, Content } = Layout;
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({Admin}) => {
   return {
-    state
+    state: Admin
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -104,7 +104,7 @@ class App extends Component {
               background: '#fff',
               padding: 0,
               display: 'flex',
-              flexDirection: 'row-reverse'
+              flexDirection: 'row-reverse',
             }}
           >
             <LoginMenu
@@ -121,12 +121,13 @@ class App extends Component {
               background: '#fff', 
               minHeight: 280,
               height: '100%',
+              overflow: 'auto'
             }}>
             <Switch>
               <Route path='/admin' exact component={DashBoard} />
               <Route path='/admin/newsList' exact component={NewsList} />
               <Route path='/admin/fileList' exact component={FileList} />
-              <Route path='/admin/newsEdit' exact component={NewsEditer} />
+              <Route path='/admin/newsEdit/:id' exact component={NewsEditer} />
               <Route path='/admin/users' exact component={Users} />
               <Route path='/admin/useredit' exact component={UserDetails} />
               <Route path='/admin/pictures' exact component={Pictures} />

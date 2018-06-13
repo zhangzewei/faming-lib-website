@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as clientAction from '../actions';
 // Require Editor JS files.
 import 'froala-editor/js/froala_editor.pkgd.min.js';
 
@@ -11,9 +14,22 @@ import 'froala-editor/css/froala_editor.pkgd.min.css';
 import 'font-awesome/css/font-awesome.css';
 import FroalaEditor from 'react-froala-wysiwyg';
 import { Input, Button } from 'antd';
+import { isEmpty, omit } from 'lodash';
 import './style.css'
 
-export default class NewsEditer extends Component {
+
+const mapStateToProps = ({Admin}) => {
+  return {
+    state: Admin
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
+
+class NewsEditer extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,9 +38,42 @@ export default class NewsEditer extends Component {
     }
   }
 
+  componentDidMount() {
+    const { match: { params: { id } }, actions } = this.props;
+    if (id && id !== 'createNews') {
+      actions.getNewsById(id);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { editNews } = nextProps.state.toJS();
+    if (!isEmpty(editNews)) {
+      this.setState({
+        title: editNews.title,
+        article: editNews.msg,
+        editNews
+      })
+    }
+  }
+
   onModelChange = input => {
-    console.log(input);
     this.setState({ article: input });
+  }
+
+  onTitleChange = e => {
+    this.setState({ title: e.target.value })
+  }
+
+  publishNews = () => {
+    const { match: { params: { id } }, actions } = this.props;
+    if (id === 'createNews') {
+      console.log('add news')
+    } else {
+      const { editNews, title, article } = this.state;
+      editNews.title = title;
+      editNews.msg = article;
+      actions.updateNews(omit(editNews, ['id', 'visitTimes', 'deleted', 'createTime']), id);
+    }
   }
 
   render() {
@@ -33,9 +82,9 @@ export default class NewsEditer extends Component {
         <div className="editer-item">
           <div className="editer-item_title">
             <span>新闻标题</span> 
-            <Button onClick={() => console.log(111)}>发布新闻</Button>
+            <Button onClick={this.publishNews}>发布新闻</Button>
           </div>
-          <Input value={this.state.title} />  
+          <Input value={this.state.title} onChange={this.onTitleChange} />  
         </div>
         <div className="editer-item">
           <div className="editer-item_title">新闻内容</div>
@@ -52,3 +101,5 @@ export default class NewsEditer extends Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsEditer)

@@ -14,7 +14,6 @@ export default [
           creator : Joi.string().required(),
           type : Joi.string().required(),
           title: Joi.string().required(),
-          tel : Joi.string().required(),
           msg : Joi.string().required(),
         }
       }
@@ -49,7 +48,7 @@ export default [
     },
   },
   {
-    path: '/news/delete/{id}',
+    path: '/news/delete/',
     method: 'POST',
     config: {
       handler: controller.deleteNewsById,
@@ -63,7 +62,7 @@ export default [
     },
   },
   {
-    path: '/news/update/{id}',
+    path: '/news/update/',
     method: 'POST',
     config: {
       handler: controller.updateNewsById,
@@ -75,7 +74,6 @@ export default [
           creator : Joi.string().required(),
           type : Joi.string().required(),
           title: Joi.string().required(),
-          tel : Joi.string().required(),
           msg : Joi.string().required(),
         }
       }

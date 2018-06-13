@@ -2,29 +2,62 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as clientAction from '../actions';
 import './style.css'
 
-export default class NewsList extends Component {
+
+const mapStateToProps = ({Admin}) => {
+  return {
+    state: Admin
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
+
+class NewsList extends Component {
   static propTypes = {
     match: PropTypes.object, // 这个是路由提供的参数，可以拿到路由带过来的参数
     list: PropTypes.array,
   }
 
+  static contextTypes = {
+    actions: PropTypes.object
+  };
+
   static defaultProps = {
     list: [
       {
         key: 'news1',
-        newsTitle: '新闻1'
+        title: '新闻1'
       },
       {
         key: 'news2',
-        newsTitle: '新闻2'
+        title: '新闻2'
       },
       {
         key: 'news3',
-        newsTitle: '新闻3'
+        title: '新闻3'
       },
     ]
+  }
+
+  componentDidMount() {
+    this.props.actions.getNewsList('*')
+  }
+
+  searchNewsByTitle = title => {
+    const query = title || '*';
+    this.props.actions.getNewsList(query)
+  }
+
+  deleteNews = record => {
+    const { newsList } = this.props.state.toJS();
+    this.props.actions.deleteNews(record.id, newsList);
   }
 
   renderTableHeader = () => (
@@ -33,30 +66,34 @@ export default class NewsList extends Component {
       <Input.Search
         style={{ width: 300 }}
         placeholder="请输入搜索文字"
+        onSearch={this.searchNewsByTitle}
       />
       <Button
         style={{ float: 'right' }}
-      ><Link to="/admin/newsEdit">发布文章</Link></Button>
+      ><Link to="/admin/newsEdit/createNews">发布文章</Link></Button>
     </div>
   );
 
   render (){
-    const { match: { params: { id } }, list } = this.props;
+    const { newsList } = this.props.state.toJS();
     const col = [
       {
         title: '标题',
-        dataIndex: 'newsTitle',
-        key: 'newsTitle'
+        dataIndex: 'title',
+        key: 'title'
       },
       {
         title: '操作',
         dateIndex: 'action',
         key: 'action',
         width: '200px',
-        render: () => (
+        render: (record) => (
           <div className="list-action">
-            <Button>编辑</Button>
-            <Button type="danger">删除</Button>
+            <Button><Link to={`/admin/newsEdit/${record.id}`}>编辑</Link></Button>
+            <Button
+              type="danger"
+              onClick={() => this.deleteNews(record)}
+            >删除</Button>
           </div>
         )
       }
@@ -65,7 +102,7 @@ export default class NewsList extends Component {
     return (
       <div className="news-table">
         <Table
-          dataSource={list}
+          dataSource={newsList}
           columns={col}
           title={() => this.renderTableHeader()}
         />
@@ -73,3 +110,5 @@ export default class NewsList extends Component {
     );
   }
 } 
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsList)

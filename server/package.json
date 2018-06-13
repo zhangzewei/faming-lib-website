@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon ./src/index.js --exec babel-node",
+    "server": "nodemon ./src/index.js --exec babel-node --inspect",
     "createDB": "babel-node ./src/db_command/createDB.js"
   },
   "author": "",
