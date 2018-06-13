@@ -13,6 +13,7 @@ export const actionTypes = {
   GET_NEWS_LIST: 'get news list',
   DELETE_NEWS: 'delete news by id',
   GET_NEWS_CONTENT: 'get news content',
+  GET_FILE_LIST: 'get file list',
 }
 
 export const getNewsList = title => async dispatch => {
@@ -71,7 +72,7 @@ export const getNewsById = id => async dispatch => {
   }
 }
 
-export const updateNews = (news, id) => async dispatch => {
+export const updateNews = (news, id) => async () => {
   try {
     const resp = await axios.post(`/news/update/`, { id, ...news });
     if (resp.data.res === 'success') {
@@ -82,5 +83,37 @@ export const updateNews = (news, id) => async dispatch => {
     }
   } catch (e) {
     openNotificationWithIcon('error', '新闻编辑', `发布新闻内容失败, ${e}`);
+  }
+}
+
+export const addNews = news => async () => {
+  try {
+    const resp = await axios.post(`/news/add`, { ...news });
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '新闻编辑', '发布新闻内容成功');
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '新闻编辑', '发布新闻内容失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '新闻编辑', `发布新闻内容失败, ${e}`);
+  }
+}
+
+export const getFileList = title => async dispatch => {
+  try {
+    const resp = await axios.get(`/file/list/${title}`);
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '文件列表', '获取文件列表成功');
+      dispatch({
+        type: actionTypes.GET_FILE_LIST,
+        list: resp.data.msg
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '文件列表', '获取文件列表失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '文件列表', `获取文件列表失败, ${e}`);
   }
 }

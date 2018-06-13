@@ -80,7 +80,7 @@ export default [
     },
   },
   {
-    path: '/news/count/{id}',
+    path: '/news/count',
     method: 'POST',
     config: {
       handler: controller.updateNewsById,

@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Table, Button, Modal, Upload, message, Icon, Input} from 'antd';
-import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as clientAction from '../actions';
 
-export default class FileList extends Component {
-  static propTypes = {
-    list: PropTypes.array,
+const mapStateToProps = ({Admin}) => {
+  return {
+    state: Admin
   }
-
-  static defaultProps = {
-    list: [
-      {
-        key: '1',
-        fileTitle: '文件1',
-      },
-      {
-        key: '2',
-        fileTitle: '文件2',
-      }
-    ]
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
   }
+}
 
+class FileList extends Component {
   constructor() {
     super();
     this.state = {
       showFileUploader: false,
     }
+  }
+
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.getFileList('*');
   }
 
   renderTableHeader = () => (
@@ -45,12 +45,12 @@ export default class FileList extends Component {
   );
 
   render (){
-    const { list } = this.props;
+    const { fileList } = this.props.state.toJS();
     const col = [
       {
         title: '标题',
-        dataIndex: 'fileTitle',
-        key: 'fileTitle',
+        dataIndex: 'title',
+        key: 'title',
       },
       {
         title: '操作',
@@ -87,7 +87,7 @@ export default class FileList extends Component {
     return (
       <div className="news-table">
         <Table
-          dataSource={list}
+          dataSource={fileList}
           columns={col}
           title={() => this.renderTableHeader()}
         />
@@ -106,4 +106,6 @@ export default class FileList extends Component {
       </div>
     );
   }
-} 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileList)

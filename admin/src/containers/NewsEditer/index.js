@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as clientAction from '../actions';
@@ -35,6 +34,7 @@ class NewsEditer extends Component {
     this.state = {
       title: '',
       article: '',
+      changed: false
     }
   }
 
@@ -57,17 +57,23 @@ class NewsEditer extends Component {
   }
 
   onModelChange = input => {
-    this.setState({ article: input });
+    this.setState({ article: input, changed: true });
   }
 
   onTitleChange = e => {
-    this.setState({ title: e.target.value })
+    this.setState({ title: e.target.value, changed: true })
   }
 
   publishNews = () => {
     const { match: { params: { id } }, actions } = this.props;
     if (id === 'createNews') {
-      console.log('add news')
+      const { title, article } = this.state;
+      actions.addNews({
+        creator: 'admin',
+        msg: article,
+        title,
+        type: 'news'
+      })
     } else {
       const { editNews, title, article } = this.state;
       editNews.title = title;
@@ -82,7 +88,10 @@ class NewsEditer extends Component {
         <div className="editer-item">
           <div className="editer-item_title">
             <span>新闻标题</span> 
-            <Button onClick={this.publishNews}>发布新闻</Button>
+            <Button
+              onClick={this.publishNews}
+              disabled={!this.state.changed}
+            >发布新闻</Button>
           </div>
           <Input value={this.state.title} onChange={this.onTitleChange} />  
         </div>
