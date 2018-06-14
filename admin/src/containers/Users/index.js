@@ -42,7 +42,9 @@ class Users extends Component {
         placeholder="请输入搜索文字"
         onSearch={this.searchUsers}
       />
-      <Button style={{ float: 'right' }}><Link to="/admin/userEdit">新增用户</Link></Button>
+      <Button
+        style={{ float: 'right' }}
+      ><Link to="/admin/userEdit/createUser">新增用户</Link></Button>
     </div>
   );
 
@@ -55,7 +57,9 @@ class Users extends Component {
       title: '操作',
       render: (record) => (
         <div className="list-action">
-          <Button>编辑</Button>
+          <Button>
+            <Link to={`/admin/userEdit/${record.id}`}>编辑</Link>
+          </Button>
           <Button
             type="danger"
             onClick={() => this.deleteUser(record.id)}

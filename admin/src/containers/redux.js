@@ -7,6 +7,7 @@ const initState = fromJS({
   fileList: [],
   pics: [],
   users: [],
+  currentUser: {}
 })
 
 export default (state = initState, action) => {
@@ -29,6 +30,8 @@ export default (state = initState, action) => {
       return state.update('users', () => fromJS(action.users));
     case actionTypes.DELETE_USERS:
       return state.update('users', () => fromJS(action.users));
+    case actionTypes.GET_CURRENT_USER:
+      return state.update('currentUser', () => fromJS(action.user));
     default: return state;
   }
 }

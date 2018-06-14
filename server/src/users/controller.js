@@ -2,14 +2,11 @@ import {
   getDB,
   getOneFromBD,
   updateOneInDB,
-  deleteByIds,
-  getAllSubjects,
   addOneToDBWithoutId,
-  getResultsByMatch,
   genMatchQuery,
   resolveMultiResults
 } from '../utils/dbUtils';
-import _get from 'lodash/get';
+import _omit from 'lodash/omit'; 
 
 const DB = getDB();
 
@@ -18,6 +15,9 @@ export const addUser = request =>
     ...request.payload,
     deleted: 0
   }, 'user');
+
+export const getUserById = params =>
+  getOneFromBD({index: 'user', id: params.params.id});
 
 export const getUserByName = async params => {
   try {
@@ -61,3 +61,17 @@ export const deleteUserById = request => {
     doc: { deleted: 1 }
   })
 }
+
+export const updateUserById = request => {
+  const {
+    id
+  } = request.payload;
+  console.log('asd',_omit(request.payload, ['id']))
+  return updateOneInDB({
+    index: 'user',
+    id,
+    doc: {
+      ..._omit(request.payload, ['id'])
+    },
+  })
+} 

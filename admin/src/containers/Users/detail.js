@@ -1,44 +1,110 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import './style.css';
 import { Input } from 'antd';
 import { Button } from 'antd/lib/radio';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { isEmpty, omit } from 'lodash';
+import * as clientAction from '../actions';
 
-// TODO: 接入数据的时候需要展示的数据用props的数据，初始的state的数据和
-// props的一致，等到修改的时候再去变动，然后上穿
-export default class UserDetails extends Component {
+const mapStateToProps = ({Admin}) => {
+  return {
+    state: Admin
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
+
+class UserDetails extends Component {
   static propTypes = {}
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+      name: '',
+      password: '',
+      changed: false
+    }
+  }
+
+  componentDidMount() {
+    const { match: { params: { id } }, actions } = this.props;
+    if (id && id !== 'createUser') {
+      actions.getUserById(id);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { currentUser } = nextProps.state.toJS();
+    if (!isEmpty(currentUser)) {
+      this.setState({
+        name: currentUser.name,
+        password: currentUser.password,
+        currentUser
+      })
+    }
+  }
+
+  changeName = e => {
+    const val = e.target.value;
+    this.setState({ name: val, changed: true });
+  }
+
+  changePass = e => {
+    const val = e.target.value;
+    this.setState({ password: val, changed: true });
+  }
+
+  updateUser = () => {
+    const { name, password } = this.state;
+    const { match: { params: { id } }, actions } = this.props;
+    if (name && password) {
+      if (id && id !== 'createUser') {
+        actions.updateUser(id, { name, password })
+      } else {
+        actions.addUser({ name, password });
+      }
+      this.setState({ changed: false });
+    } else {
+      clientAction.openNotificationWithIcon('error', '用户管理', '用户名和密码不能有空值。')
+    }
   }
 
   render() {
+    const { name, password, changed } = this.state;
     return (
       <div className="user-detail__container">
         <h2>用户信息</h2>
         <div className="user-details">
           <div className="user-details_item">
             <label>用户名</label>
-            <Input />
+            <Input
+              value={name}
+              onChange={this.changeName}
+            />
           </div>
-          <div className="user-details_item">
-            <label>用户权限</label>
-            <Input />
-          </div>
-          <div className="user-details_item">
+          {/* <div className="user-details_item">
             <label>电话</label>
             <Input />
-          </div>
+          </div> */}
           <div className="user-details_item">
             <label>密码</label>
-            <Input type="password" />
+            <Input
+              value={password}
+              onChange={this.changePass}
+            />
           </div>
         </div>
         <Button
           style={{ float: 'right' }}
+          disabled={!changed}
+          onClick={this.updateUser}
         >确认</Button>
       </div>
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetails)

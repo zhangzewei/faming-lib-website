@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { notification } from 'antd';
 
-const openNotificationWithIcon = (type, message, description) => {
+export const openNotificationWithIcon = (type, message, description) => {
   notification[type]({
     message,
     description,
@@ -19,6 +19,7 @@ export const actionTypes = {
   DELETE_PIC: 'delete pics',
   GET_USERS: 'get users',
   DELETE_USERS: 'delete users',
+  GET_CURRENT_USER: 'get current user',
 }
 
 export const getNewsList = title => async dispatch => {
@@ -213,5 +214,51 @@ export const deleteUser = (id, users) => async dispatch => {
     }
   } catch (e) {
     openNotificationWithIcon('error', '用户列表', `删除用户失败, ${e}`);
+  }
+}
+
+export const getUserById = id => async dispatch => {
+  try {
+    const resp = await axios.get(`/user/${id}`);
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '用户管理', '获取用户信息成功');
+      dispatch({
+        type: actionTypes.GET_CURRENT_USER,
+        user: resp.data.msg,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '用户管理', '获取用户信息失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '用户管理', `获取用户信息失败, ${e}`);
+  }
+}
+
+export const updateUser = (id, doc) => async () => {
+  try {
+    const resp = await axios.post(`/user/update`, { id, ...doc });
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '用户管理', '更新用户信息成功');
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '用户管理', '更新用户信息失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '用户管理', `更新用户信息失败, ${e}`);
+  }
+}
+
+export const addUser = doc => async () => {
+  try {
+    const resp = await axios.post(`/user/add`, { ...doc, authority: 'admin' });
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '用户管理', '新增用户信息成功');
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '用户管理', '新增用户信息失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '用户管理', `新增用户信息失败, ${e}`);
   }
 }

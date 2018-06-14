@@ -72,7 +72,7 @@ export const updateNewsById = request => {
     index: 'news',
     id,
     doc: {
-      ..._omit(request.payload, 'id')
+      ..._omit(request.payload, ['id'])
     },
   })
 } 
