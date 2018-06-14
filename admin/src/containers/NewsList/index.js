@@ -105,6 +105,7 @@ class NewsList extends Component {
           dataSource={newsList}
           columns={col}
           title={() => this.renderTableHeader()}
+          rowKey="id"
         />
       </div>
     );

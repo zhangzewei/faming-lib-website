@@ -106,6 +106,7 @@ class FileList extends Component {
           dataSource={fileList}
           columns={col}
           title={() => this.renderTableHeader()}
+          rowKey="id"
         />
         <Modal
           visible={this.state.showFileUploader}

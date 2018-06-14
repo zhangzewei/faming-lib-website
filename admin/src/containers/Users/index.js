@@ -31,7 +31,6 @@ class Users extends Component {
           <Button>编辑</Button>
           <Button type="danger" onClick={() => this.deleteUser(record)}>删除</Button>
         </div>
-        
       )
     }];
     let data = [
@@ -45,6 +44,7 @@ class Users extends Component {
         columns={columns}
         dataSource={data}
         title={() => this.renderTableHeader()}
+        rowKey="id"
       />
     )
   }

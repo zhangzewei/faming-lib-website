@@ -69,6 +69,7 @@ class Pictures extends Component {
         columns={columns}
         dataSource={pics}
         title={() => this.renderTableHeader()}
+        rowKey="id"
       />
     )
   }
