@@ -5,7 +5,8 @@ const initState = fromJS({
   newsList: [],
   editNews: {},
   fileList: [],
-  pics: []
+  pics: [],
+  users: [],
 })
 
 export default (state = initState, action) => {
@@ -24,6 +25,10 @@ export default (state = initState, action) => {
       return state.update('pics', () => fromJS(action.pics));
     case actionTypes.DELETE_PIC:
       return state.update('pics', () => fromJS(action.pics));
+    case actionTypes.GET_USERS:
+      return state.update('users', () => fromJS(action.users));
+    case actionTypes.DELETE_USERS:
+      return state.update('users', () => fromJS(action.users));
     default: return state;
   }
 }

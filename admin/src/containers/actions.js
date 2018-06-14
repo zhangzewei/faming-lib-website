@@ -16,7 +16,9 @@ export const actionTypes = {
   GET_FILE_LIST: 'get file list',
   DELETE_FILE: 'delete file',
   GET_PICS: 'get pics',
-  DELETE_PIC: 'delete pics'
+  DELETE_PIC: 'delete pics',
+  GET_USERS: 'get users',
+  DELETE_USERS: 'delete users',
 }
 
 export const getNewsList = title => async dispatch => {
@@ -174,5 +176,42 @@ export const deletePic = (id, pics) => async dispatch => {
     }
   } catch (e) {
     openNotificationWithIcon('error', '文件列表', `删除文件失败, ${e}`);
+  }
+}
+
+export const getUsers = name => async dispatch => {
+  try {
+    const resp = await axios.get(`/user/list/${name}`);
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '用户列表', '获取用户列表成功');
+      dispatch({
+        type: actionTypes.GET_USERS,
+        users: resp.data.msg,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '用户列表', '获取用户列表失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '用户列表', `获取用户列表失败, ${e}`);
+  }
+}
+
+export const deleteUser = (id, users) => async dispatch => {
+  try {
+    const resp = await axios.post('/user/delete/', {id});
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '用户列表', '删除用户成功');
+      const deletedUsers = users.filter(user => user.id !== id);
+      dispatch({
+        type: actionTypes.DELETE_USERS,
+        users: deletedUsers,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '用户列表', '删除用户失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '用户列表', `删除用户失败, ${e}`);
   }
 }
