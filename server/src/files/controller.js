@@ -9,7 +9,6 @@ import {
   genMatchQuery,
   resolveMultiResults
 } from '../utils/dbUtils';
-import _get from 'lodash/get';
 
 const DB = getDB();
 

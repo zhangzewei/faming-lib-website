@@ -2,14 +2,10 @@ import {
   getDB,
   getOneFromBD,
   updateOneInDB,
-  deleteByIds,
-  getAllSubjects,
   addOneToDBWithoutId,
-  getResultsByMatch,
   genMatchQuery,
   resolveMultiResults
 } from '../utils/dbUtils';
-import _get from 'lodash/get';
 import _omit from 'lodash/omit'; 
 
 const DB = getDB();

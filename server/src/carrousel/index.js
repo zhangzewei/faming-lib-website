@@ -33,7 +33,7 @@ export default [
     },
   },
   {
-    path: '/carrousel/delete/{id}',
+    path: '/carrousel/delete/',
     method: 'POST',
     config: {
       handler: controller.deleteImgById,

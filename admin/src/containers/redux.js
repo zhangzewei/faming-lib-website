@@ -4,7 +4,8 @@ import { actionTypes } from './actions';
 const initState = fromJS({
   newsList: [],
   editNews: {},
-  fileList: []
+  fileList: [],
+  pics: []
 })
 
 export default (state = initState, action) => {
@@ -19,6 +20,10 @@ export default (state = initState, action) => {
       return state.update('fileList', () => fromJS(action.list));
     case actionTypes.DELETE_FILE: 
       return state.update('fileList', () => fromJS(action.list));
+    case actionTypes.GET_PICS:
+      return state.update('pics', () => fromJS(action.pics));
+    case actionTypes.DELETE_PIC:
+      return state.update('pics', () => fromJS(action.pics));
     default: return state;
   }
 }

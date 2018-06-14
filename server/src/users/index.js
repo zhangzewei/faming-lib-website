@@ -35,7 +35,7 @@ export default [
     },
   },
   {
-    path: '/user/delete/{id}',
+    path: '/user/delete/',
     method: 'POST',
     config: {
       handler: controller.deleteUserById,

@@ -14,7 +14,9 @@ export const actionTypes = {
   DELETE_NEWS: 'delete news by id',
   GET_NEWS_CONTENT: 'get news content',
   GET_FILE_LIST: 'get file list',
-  DELETE_FILE: 'delete file'
+  DELETE_FILE: 'delete file',
+  GET_PICS: 'get pics',
+  DELETE_PIC: 'delete pics'
 }
 
 export const getNewsList = title => async dispatch => {
@@ -128,6 +130,43 @@ export const deleteFile = (id, fileList) => async dispatch => {
       dispatch({
         type: actionTypes.DELETE_FILE,
         list: deletedFileLsit,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '文件列表', '删除文件失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '文件列表', `删除文件失败, ${e}`);
+  }
+}
+
+export const getPics = title => async dispatch => {
+  try {
+    const resp = await axios.get(`/carrousel/list/${title}`);
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '轮播图列表', '获取轮播图列表成功');
+      dispatch({
+        type: actionTypes.GET_PICS,
+        pics: resp.data.msg,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '轮播图列表', '获取轮播图列表失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '轮播图列表', `获取轮播图列表失败, ${e}`);
+  }
+}
+
+export const deletePic = (id, pics) => async dispatch => {
+  try {
+    const resp = await axios.post('/carrousel/delete/', {id});
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '文件列表', '删除文件成功');
+      const deletedPics = pics.filter(pic => pic.id !== id);
+      dispatch({
+        type: actionTypes.DELETE_PIC,
+        pics: deletedPics,
       })
     }
     if (resp.data.res === 'error') {
