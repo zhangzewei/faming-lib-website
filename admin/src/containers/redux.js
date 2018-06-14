@@ -17,6 +17,8 @@ export default (state = initState, action) => {
       return state.update('editNews', () => fromJS(action.editNews));
     case actionTypes.GET_FILE_LIST:
       return state.update('fileList', () => fromJS(action.list));
+    case actionTypes.DELETE_FILE: 
+      return state.update('fileList', () => fromJS(action.list));
     default: return state;
   }
 }

@@ -14,6 +14,7 @@ export const actionTypes = {
   DELETE_NEWS: 'delete news by id',
   GET_NEWS_CONTENT: 'get news content',
   GET_FILE_LIST: 'get file list',
+  DELETE_FILE: 'delete file'
 }
 
 export const getNewsList = title => async dispatch => {
@@ -115,5 +116,24 @@ export const getFileList = title => async dispatch => {
     }
   } catch (e) {
     openNotificationWithIcon('error', '文件列表', `获取文件列表失败, ${e}`);
+  }
+}
+
+export const deleteFile = (id, fileList) => async dispatch => {
+  try {
+    const resp = await axios.post('/file/delete/', {id});
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '文件列表', '删除文件成功');
+      const deletedFileLsit = fileList.filter(file => file.id !== id);
+      dispatch({
+        type: actionTypes.DELETE_FILE,
+        list: deletedFileLsit,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '文件列表', '删除文件失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '文件列表', `删除文件失败, ${e}`);
   }
 }
