@@ -33,7 +33,7 @@ export default [
     },
   },
   {
-    path: '/file/delete/{id}',
+    path: '/file/delete/',
     method: 'POST',
     config: {
       handler: controller.deleteFileById,

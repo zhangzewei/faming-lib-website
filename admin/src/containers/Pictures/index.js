@@ -2,60 +2,74 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table, Button, Input } from 'antd';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as clientAction from '../actions';
 
 import './style.css';
 
+const mapStateToProps = ({Admin}) => {
+  return {
+    state: Admin
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
+
 class Pictures extends Component {
-  static propTypes = {
-    pics: PropTypes.array,
+
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.getPics('*');
   }
 
-  static defaultProps = {
-    pics: []
+  deletePic = id => {
+    const { actions } = this.props;
+    const { pics } = this.props.state.toJS();
+    actions.deletePic(id, pics);
   }
-
-  deleteUser = r => console.log(r);
 
   renderTableHeader = () => (
     <div className="table-header">
       <h2>轮播图列表</h2>
       <Button
-        disabled={this.props.pics.lengtn >= 5}
+        disabled={this.props.state.toJS().pics.lengtn >= 5}
       ><Link to="/admin/picEdit">新增轮播图</Link></Button>
     </div>
   );
 
   renderTable = () => {
+    const { pics } = this.props.state.toJS();
     const columns = [{
       title: '图片',
-      dataIndex: 'pic',
+      dataIndex: 'img',
       render: (text) => (
         <img className="news-pic" src={text} alt={text} />
       )
     }, {
       title: '新闻标题',
-      dataIndex: 'newsTitle',
+      dataIndex: 'articleTitle',
     }, {
       title: '操作',
-      render: (_, record) => (
+      render: (record) => (
         <div className="list-action">
           <Button>编辑</Button>
-          <Button type="danger" onClick={() => this.deleteUser(record)}>删除</Button>
+          <Button
+            type="danger"
+            onClick={() => this.deletePic(record.id)}
+          >删除</Button>
         </div>
       )
     }];
-    let data = [
-      {
-        key: 'u1',
-        pic: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1528355327&di=61681caa7552f647b58a04d18d9cfe60&imgtype=jpg&er=1&src=http%3A%2F%2Fmvimg1.meitudata.com%2F5665a21fefb4b7202.jpg',
-        newsTitle: '可爱的猫'
-      }
-    ];
     return (
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={pics}
         title={() => this.renderTableHeader()}
+        rowKey="id"
       />
     )
   }
@@ -69,4 +83,4 @@ class Pictures extends Component {
   }
 }
 
-export default Pictures;
+export default connect(mapStateToProps, mapDispatchToProps)(Pictures)

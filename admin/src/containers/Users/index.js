@@ -1,13 +1,38 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Table, Button, Input } from 'antd';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as clientAction from '../actions';
+
+const mapStateToProps = ({Admin}) => {
+  return {
+    state: Admin
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
 
 class Users extends Component {
-  static propTypes = {
+  componentDidMount() {
+    const { actions } = this.props;
+    actions.getUsers('*');
   }
 
-  deleteUser = r => console.log(r);
+  searchUsers = name => {
+    const { actions } = this.props;
+    const query = name || '*';
+    actions.getUsers(query);
+  }
+
+  deleteUser = id => {
+    const { actions } = this.props;
+    const { users } = this.props.state.toJS();
+    actions.deleteUser(id, users);
+  }
 
   renderTableHeader = () => (
     <div className="table-header">
@@ -15,36 +40,39 @@ class Users extends Component {
       <Input.Search
         style={{ width: 300 }}
         placeholder="请输入搜索文字"
+        onSearch={this.searchUsers}
       />
-      <Button style={{ float: 'right' }}><Link to="/admin/userEdit">新增用户</Link></Button>
+      <Button
+        style={{ float: 'right' }}
+      ><Link to="/admin/userEdit/createUser">新增用户</Link></Button>
     </div>
   );
 
   renderTable = () => {
+    const { users } = this.props.state.toJS();
     const columns = [{
       title: '用户名',
-      dataIndex: 'userName',
+      dataIndex: 'name',
     }, {
       title: '操作',
-      render: (_, record) => (
+      render: (record) => (
         <div className="list-action">
-          <Button>编辑</Button>
-          <Button type="danger" onClick={() => this.deleteUser(record)}>删除</Button>
+          <Button>
+            <Link to={`/admin/userEdit/${record.id}`}>编辑</Link>
+          </Button>
+          <Button
+            type="danger"
+            onClick={() => this.deleteUser(record.id)}
+          >删除</Button>
         </div>
-        
       )
     }];
-    let data = [
-      {
-        key: 'u1',
-        userName: 'hahah'
-      }
-    ];
     return (
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={users}
         title={() => this.renderTableHeader()}
+        rowKey="id"
       />
     )
   }
@@ -58,4 +86,4 @@ class Users extends Component {
   }
 }
 
-export default Users;
+export default connect(mapStateToProps, mapDispatchToProps)(Users)

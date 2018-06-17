@@ -129,7 +129,7 @@ class App extends Component {
               <Route path='/admin/fileList' exact component={FileList} />
               <Route path='/admin/newsEdit/:id' exact component={NewsEditer} />
               <Route path='/admin/users' exact component={Users} />
-              <Route path='/admin/useredit' exact component={UserDetails} />
+              <Route path='/admin/userEdit/:id' exact component={UserDetails} />
               <Route path='/admin/pictures' exact component={Pictures} />
               <Route path='/admin/picEdit' exact component={PicDetails} />
               <Route component={NotMatch} />

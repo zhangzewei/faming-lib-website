@@ -28,12 +28,25 @@ class FileList extends Component {
     actions.getFileList('*');
   }
 
+  deleteFile = id => {
+    const { actions } = this.props;
+    const { fileList } = this.props.state.toJS();
+    actions.deleteFile(id, fileList);
+  }
+
+  searchFile = val => {
+    const { actions } = this.props;
+    const query = val || '*';
+    actions.getFileList(query);
+  }
+
   renderTableHeader = () => (
     <div className="table-header">
       <h2>文件列表</h2>
       <Input.Search
         style={{ width: 300 }}
         placeholder="请输入搜索文字"
+        onSearch={this.searchFile}
       />
       <Button
         style={{ float: 'right' }}
@@ -57,10 +70,13 @@ class FileList extends Component {
         dateIndex: 'action',
         key: 'action',
         width: '200px',
-        render: () => (
+        render: (record) => (
           <div className="list-action">
             <Button>下载</Button>
-            <Button type="danger">删除</Button>
+            <Button
+              type="danger"
+              onClick={() => this.deleteFile(record.id)}
+            >删除</Button>
           </div>
         )
       }
@@ -90,6 +106,7 @@ class FileList extends Component {
           dataSource={fileList}
           columns={col}
           title={() => this.renderTableHeader()}
+          rowKey="id"
         />
         <Modal
           visible={this.state.showFileUploader}

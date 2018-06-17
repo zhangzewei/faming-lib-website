@@ -12,10 +12,8 @@ export default [
       validate: {
         payload: {
           name : Joi.string().required(),
-          type : Joi.string().required(),
           authority: Joi.string().required(),
           password: Joi.string().required(),
-          tel: Joi.string(),
         }
       }
     },
@@ -35,7 +33,7 @@ export default [
     },
   },
   {
-    path: '/user/delete/{id}',
+    path: '/user/delete/',
     method: 'POST',
     config: {
       handler: controller.deleteUserById,
@@ -48,4 +46,34 @@ export default [
       }
     },
   },
+  {
+    path: '/user/{id}',
+    method: 'GET',
+    config: {
+      handler: controller.getUserById,
+      tags: ['api'],
+      description: '根据id获取用户',
+      validate: {
+        params: {
+          id: Joi.string().required(),
+        }
+      }
+    },
+  },
+  {
+    path: '/user/update',
+    method: 'POST',
+    config: {
+      handler: controller.updateUserById,
+      tags: ['api'],
+      description: '根据id上传',
+      validate: {
+        payload: {
+          id: Joi.string().required(),
+          name: Joi.string().required(),
+          password: Joi.string().required()
+        }
+      }
+    },
+  }
 ]
