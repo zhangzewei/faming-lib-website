@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon ./src/index.js --exec babel-node --inspect",
+    "server": "nodemon ./src/index.js --exec babel-node",
+    "server_debug": "nodemon ./src/index.js --exec babel-node --inspect",
     "createDB": "babel-node ./src/db_command/createDB.js"
   },
   "author": "",
@@ -13,6 +14,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
+    "base64-img": "^1.0.4",
     "cuid": "^2.1.1",
     "elasticsearch": "^14.2.2",
     "hapi": "^17.3.1",

@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { notification } from 'antd';
 
+notification.config({
+  duration: 2,
+});
+
 export const openNotificationWithIcon = (type, message, description) => {
   notification[type]({
     message,
@@ -38,7 +42,6 @@ export const getNewsList = title => async dispatch => {
   } catch (e) {
     openNotificationWithIcon('error', '新闻列表', '获取列表失败');
   }
-  
 }
 
 export const deleteNews = (id, newsList) => async dispatch => {

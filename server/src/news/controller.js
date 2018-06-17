@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+import base64Img from 'base64-img';
 import {
   getDB,
   getOneFromBD,
@@ -76,3 +79,17 @@ export const updateNewsById = request => {
     },
   })
 } 
+
+export const uploadImageByNews = async request => {
+  const { file } = request.payload;
+  const imgName = new Date().getTime();
+  const imagePath = path.resolve(__dirname, `../public/images/${imgName}.png`);
+  const resp = await 
+    fs.writeFileSync(
+      imagePath,
+      file
+    );
+  return {
+    link: `/images/${imgName}.png`
+  };
+}

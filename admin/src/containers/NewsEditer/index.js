@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import $ from 'jquery';
 import * as clientAction from '../actions';
 // Require Editor JS files.
 import 'froala-editor/js/froala_editor.pkgd.min.js';
@@ -34,7 +35,7 @@ class NewsEditer extends Component {
     this.state = {
       title: '',
       article: '',
-      changed: false
+      changed: false,
     }
   }
 
@@ -98,11 +99,19 @@ class NewsEditer extends Component {
         <div className="editer-item">
           <div className="editer-item_title">新闻内容</div>
           <FroalaEditor
+            ref={n => this.editor = n}
             tag='textarea'
             model={this.state.article}
             onModelChange={this.onModelChange}
             config={{
-              editorClass: 'news-editer'
+              placeholderText: '编写新闻',
+              editorClass: 'news-editer',
+              imageUploadURL: '/news/image/upload',
+              events: {
+                'froalaEditor.image.uploaded': (_e, _ed, resp) => {
+                  return resp;
+                }
+              }
             }}
           />
         </div>

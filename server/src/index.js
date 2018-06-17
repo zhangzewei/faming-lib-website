@@ -26,6 +26,17 @@ const init = async () => {
   } catch (err) {
     throw err
   }
+  app.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+      directory: {
+        path: '.',
+        redirectToSlash: true,
+        index: true,
+      }
+    }
+  });
   await app.start();
   console.log(`Server running at: ${app.info.uri}`);
 };

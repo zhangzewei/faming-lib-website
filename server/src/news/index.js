@@ -93,5 +93,19 @@ export default [
         }
       }
     },
+  },
+  {
+    path: '/news/image/upload',
+    method: 'POST',
+    config: {
+      handler: controller.uploadImageByNews,
+      tags: ['api'],
+      description: '根据id上传观看次数',
+      validate: {
+        payload: {
+          file: Joi.any().required(),
+        }
+      }
+    },
   }
 ]
