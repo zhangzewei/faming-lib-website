@@ -14,6 +14,7 @@ export default [
           updater : Joi.string().required(),
           type : Joi.string().required(),
           title: Joi.string().required(),
+          path: Joi.string().required(),
         }
       }
     },
@@ -46,4 +47,19 @@ export default [
       }
     },
   },
+  {
+    path: '/file/upload',
+    method: 'POST',
+    config: {
+      handler: controller.uploadFile,
+      tags: ['api'],
+      description: '上传文件',
+      validate: {
+        payload: {
+          file: Joi.any().required(),
+          fileName: Joi.any().required()
+        }
+      }
+    },
+  }
 ]

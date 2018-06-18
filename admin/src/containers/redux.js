@@ -7,7 +7,8 @@ const initState = fromJS({
   fileList: [],
   pics: [],
   users: [],
-  currentUser: {}
+  currentUser: {},
+  fileAdded: true,
 })
 
 export default (state = initState, action) => {
@@ -32,6 +33,8 @@ export default (state = initState, action) => {
       return state.update('users', () => fromJS(action.users));
     case actionTypes.GET_CURRENT_USER:
       return state.update('currentUser', () => fromJS(action.user));
+    case actionTypes.ADD_FILE:
+      return state.update('fileAdded', () => fromJS(action.added));
     default: return state;
   }
 }

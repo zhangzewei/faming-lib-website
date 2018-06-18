@@ -24,6 +24,7 @@ export const actionTypes = {
   GET_USERS: 'get users',
   DELETE_USERS: 'delete users',
   GET_CURRENT_USER: 'get current user',
+  ADD_FILE: 'add file'
 }
 
 export const getNewsList = title => async dispatch => {
@@ -263,5 +264,22 @@ export const addUser = doc => async () => {
     }
   } catch (e) {
     openNotificationWithIcon('error', '用户管理', `新增用户信息失败, ${e}`);
+  }
+}
+
+export const addFile = doc => async dispath => {
+  try {
+    const resp = await axios.post(`/file/add`, { ...doc });
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '文件管理', '文件添加成功');
+      setTimeout(() => {
+        dispath(getFileList('*'))
+      }, 1000);
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '文件管理', '文件添加失败');
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '文件管理', `文件添加失败, ${e}`);
   }
 }

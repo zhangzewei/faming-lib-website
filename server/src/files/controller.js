@@ -1,25 +1,25 @@
+import path from 'path';
+import fs from 'fs';
 import {
   getDB,
-  getOneFromBD,
   updateOneInDB,
-  deleteByIds,
-  getAllSubjects,
   addOneToDBWithoutId,
-  getResultsByMatch,
   genMatchQuery,
   resolveMultiResults
 } from '../utils/dbUtils';
 
 const DB = getDB();
 
-export const addFile = request =>
-  addOneToDBWithoutId({
+export const addFile = request => {
+  const { file } = request.payload;
+  console.log(file);
+  return addOneToDBWithoutId({
     ...request.payload,
     createTime: new Date().getTime(),
-    filePath: '/tmp/',
     visitTimes: 0,
     deleted: 0
   }, 'file');
+}
 
 export const getFileByTitle = async params => {
   try {
@@ -62,4 +62,17 @@ export const deleteFileById = request => {
     id,
     doc: { deleted: 1 }
   })
+}
+
+export const uploadFile = async request => {
+  const { file, fileName } = request.payload;
+  const filePath = path.resolve(__dirname, `../public/files/${fileName}`);
+  const resp = await 
+    fs.writeFileSync(
+      filePath,
+      file
+    );
+  return {
+    link: `/files/${fileName}`
+  };
 }

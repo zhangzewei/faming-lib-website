@@ -20,6 +20,8 @@ class FileList extends Component {
     super();
     this.state = {
       showFileUploader: false,
+      link: '',
+      fileName: ''
     }
   }
 
@@ -38,6 +40,19 @@ class FileList extends Component {
     const { actions } = this.props;
     const query = val || '*';
     actions.getFileList(query);
+  }
+
+  addFile = () => {
+    const { link, fileName } = this.state;
+    if (link && fileName) {
+      this.props.actions.addFile({
+        updater: 'admin',
+        type: 'out',
+        title: fileName,
+        path: link
+      });
+    }
+    this.setState({ showFileUploader: false })
   }
 
   renderTableHeader = () => (
@@ -72,7 +87,9 @@ class FileList extends Component {
         width: '200px',
         render: (record) => (
           <div className="list-action">
-            <Button>下载</Button>
+            <Button>
+              <a href={`http://localhost:4000${record.path}`} download={`下载${record.title}`}>下载</a>
+            </Button>
             <Button
               type="danger"
               onClick={() => this.deleteFile(record.id)}
@@ -84,18 +101,22 @@ class FileList extends Component {
     
     const uploadProps = {
       name: 'file',
-      action: '//jsonplaceholder.typicode.com/posts/',
+      action: '/file/upload',
       headers: {
         authorization: 'authorization-text',
       },
-      onChange(info) {
+      data: {
+        fileName: this.state.fileName
+      },
+      onChange: (info) => {
         if (info.file.status !== 'uploading') {
           console.log(info.file, info.fileList);
         }
         if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
+          this.setState({
+            link: info.file.response.link,
+            fileName: info.file.name
+          })
         }
       },
     }
@@ -113,8 +134,12 @@ class FileList extends Component {
           onCancel={() => this.setState({ showFileUploader: false })}
           okText="上传"
           cancelText="取消"
+          onOk={this.addFile}
         >
-          <Upload {...uploadProps}>
+          <Upload
+            beforeUpload={file => this.setState({ fileName: file.name })}
+            {...uploadProps}
+          >
             <Button>
               <Icon type="upload" /> Click to Upload
             </Button>

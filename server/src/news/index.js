@@ -100,7 +100,7 @@ export default [
     config: {
       handler: controller.uploadImageByNews,
       tags: ['api'],
-      description: '根据id上传观看次数',
+      description: '上传图片在新闻编辑中',
       validate: {
         payload: {
           file: Joi.any().required(),
