@@ -21,7 +21,8 @@ class FileList extends Component {
     this.state = {
       showFileUploader: false,
       link: '',
-      fileName: ''
+      fileName: '',
+      currentFiles: []
     }
   }
 
@@ -74,6 +75,7 @@ class FileList extends Component {
 
   render (){
     const { fileList } = this.props.state.toJS();
+    const { currentFiles } = this.state;
     const col = [
       {
         title: '标题',
@@ -109,6 +111,7 @@ class FileList extends Component {
         fileName: this.state.fileName
       },
       onChange: (info) => {
+        this.setState({currentFiles: info.fileList})
         if (info.file.status !== 'uploading') {
           console.log(info.file, info.fileList);
         }
@@ -138,11 +141,17 @@ class FileList extends Component {
         >
           <Upload
             beforeUpload={file => this.setState({ fileName: file.name })}
+            fileList={currentFiles}
             {...uploadProps}
           >
-            <Button>
-              <Icon type="upload" /> Click to Upload
-            </Button>
+            {
+              currentFiles.length >= 1 ? <br /> :
+              (
+                <Button>
+                  <Icon type="upload" /> Click to Upload
+                </Button>
+              )
+            }
           </Upload>
         </Modal>
       </div>
