@@ -283,3 +283,17 @@ export const addFile = doc => async dispath => {
     openNotificationWithIcon('error', '文件管理', `文件添加失败, ${e}`);
   }
 }
+
+export const addPics = doc => async dispatch => {
+  try {
+    const resp = await axios.post(`/carrousel/add`, { ...doc });
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '轮播图', '轮播图添加成功');
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '轮播图', '轮播图添加失败');
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '轮播图', `轮播图添加失败, ${e}`);
+  }
+}

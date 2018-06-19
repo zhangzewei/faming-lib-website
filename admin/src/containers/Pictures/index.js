@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Table, Button, Input } from 'antd';
+import { Table, Button } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as clientAction from '../actions';

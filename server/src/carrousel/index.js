@@ -11,8 +11,8 @@ export default [
       tags: ['api'],
       validate: {
         payload: {
-          img : Joi.string().required(),
-          articleTitle : Joi.string().required(),
+          img: Joi.string().required(),
+          articleTitle: Joi.string().required(),
           articleLinkId: Joi.string().required(),
         }
       }

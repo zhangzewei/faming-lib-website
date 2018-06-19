@@ -66,13 +66,14 @@ export const deleteFileById = request => {
 
 export const uploadFile = async request => {
   const { file, fileName } = request.payload;
-  const filePath = path.resolve(__dirname, `../public/files/${fileName}`);
+  const time = new Date().getTime();
+  const filePath = path.resolve(__dirname, `../public/files/${time}-${fileName}`);
   const resp = await 
     fs.writeFileSync(
       filePath,
       file
     );
   return {
-    link: `/files/${fileName}`
+    link: `/files/${time}-${fileName}`
   };
 }
