@@ -4,6 +4,7 @@ import { Table, Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 import * as clientAction from '../actions';
 import './style.css'
 
@@ -81,6 +82,14 @@ class NewsList extends Component {
         title: '标题',
         dataIndex: 'title',
         key: 'title'
+      },
+      {
+        title: '发布时间',
+        dataIndex: 'createTime',
+        key: 'createTime',
+        render: (text) => (
+          <span>{moment(text).format('l')}</span>
+        )
       },
       {
         title: '操作',

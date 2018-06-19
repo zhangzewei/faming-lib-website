@@ -40,7 +40,10 @@ export const getNewByTitle = async params => {
               }
             }
           }
-        }
+        },
+        sort: [
+          { createTime: 'desc' }
+        ]
       }
     });
     return {
