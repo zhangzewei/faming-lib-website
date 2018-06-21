@@ -117,6 +117,7 @@ class PicsDetails extends Component {
           </div>
         </div>
         <Button
+          disabled={this.props.state.toJS().pics.length >= 5}
           onClick={this.updateImage}
         >
           上传轮播图

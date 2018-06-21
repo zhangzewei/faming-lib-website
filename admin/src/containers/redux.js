@@ -40,6 +40,8 @@ export default (state = initState, action) => {
       return state.update('user', () => fromJS(action.user));
     case actionTypes.LOG_OUT:
       return state.update('user', () => fromJS(action.user));
+    case actionTypes.LOG_IN_BY_LOCALSTORAGE:
+      return state.update('user', () => fromJS(action.user));
     default: return state;
   }
 }

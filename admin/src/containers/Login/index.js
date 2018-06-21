@@ -5,6 +5,7 @@ import * as clientAction from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Base64 } from 'js-base64';
+import _get from 'lodash/get';
 import './style.css';
 
 const FormItem = Form.Item;
@@ -32,12 +33,22 @@ class Login extends Component {
       }
     });
   }
+
+  componentDidMount() {
+    const userJson = window.localStorage.getItem('user');
+    const userInLocalStorage = JSON.parse(userJson);
+    this.props.actions.loginByLocalStorage(userInLocalStorage);
+  }
+
   render() {
     const { user } = this.props.state.toJS();
-    if(user && user.logined) {
+    const logined = _get(user, 'logined', '');
+
+    if(logined) {
       clientAction.openNotificationWithIcon('success', '登录', `欢迎登录${user.name}`)
       return (<Redirect to="/admin"/>);
     }
+
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="login-container">

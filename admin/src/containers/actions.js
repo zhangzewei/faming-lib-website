@@ -26,7 +26,8 @@ export const actionTypes = {
   GET_CURRENT_USER: 'get current user',
   ADD_FILE: 'add file',
   LOGIN_DONE: 'login done',
-  LOG_OUT: 'log out'
+  LOG_OUT: 'log out',
+  LOG_IN_BY_LOCALSTORAGE: 'login by localstorage'
 }
 
 export const getNewsList = title => async dispatch => {
@@ -286,11 +287,14 @@ export const addFile = doc => async dispath => {
   }
 }
 
-export const addPics = doc => async () => {
+export const addPics = doc => async dispath => {
   try {
     const resp = await axios.post(`/carrousel/add`, { ...doc });
     if (resp.data.res === 'success') {
       openNotificationWithIcon('success', '轮播图', '轮播图添加成功');
+      setTimeout(() => {
+        dispath(getPics('*'))
+      }, 1000);
     }
     if (resp.data.res === 'error') {
       openNotificationWithIcon('error', '轮播图', '轮播图添加失败');
@@ -323,4 +327,9 @@ export const login = doc => async dispatch => {
 export const logOut = () => ({
   type: actionTypes.LOG_OUT,
   user: {}
+})
+
+export const loginByLocalStorage = user => ({
+  type: actionTypes.LOG_IN_BY_LOCALSTORAGE,
+  user
 })

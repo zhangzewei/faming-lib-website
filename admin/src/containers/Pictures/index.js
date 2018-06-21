@@ -35,7 +35,7 @@ class Pictures extends Component {
     <div className="table-header">
       <h2>轮播图列表</h2>
       <Button
-        disabled={this.props.state.toJS().pics.lengtn >= 5}
+        disabled={this.props.state.toJS().pics.length >= 5}
       ><Link to="/admin/picEdit">新增轮播图</Link></Button>
     </div>
   );

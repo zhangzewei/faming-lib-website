@@ -36,6 +36,12 @@ class App extends Component {
     selectedMenu: this.props.location.pathname.split('/')[2] || 'dashboard',
   };
 
+  componentDidMount() {
+    const userJson = window.localStorage.getItem('user');
+    const userInLocalStorage = JSON.parse(userJson);
+    this.props.actions.loginByLocalStorage(userInLocalStorage);
+  }
+
   componentWillReceiveProps(nextProps) {
     const selectedMenu =
       nextProps.location.pathname.split('/')[2] || 'dashboard';
@@ -93,13 +99,13 @@ class App extends Component {
 
   render() {
     const { user } = this.props.state.toJS();
-    const userJson = window.localStorage.getItem('user');
-    const userInLocalStorage = JSON.parse(userJson);
-    const logined = _get(user, 'logined', '') || _get(userInLocalStorage, 'logined', '');
+    const logined = _get(user, 'logined', '');
+
     if(!logined) {
       clientAction.openNotificationWithIcon('error', '登录', '请登录之后访问系统。')
       return (<Redirect to="/"/>);
     }
+
     const menu = (<Menu
       onClick={this.menuOnClick}
     >
