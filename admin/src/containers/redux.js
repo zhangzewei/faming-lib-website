@@ -9,6 +9,7 @@ const initState = fromJS({
   users: [],
   currentUser: {},
   fileAdded: true,
+  user: {}
 })
 
 export default (state = initState, action) => {
@@ -35,6 +36,10 @@ export default (state = initState, action) => {
       return state.update('currentUser', () => fromJS(action.user));
     case actionTypes.ADD_FILE:
       return state.update('fileAdded', () => fromJS(action.added));
+    case actionTypes.LOGIN_DONE:
+      return state.update('user', () => fromJS(action.user));
+    case actionTypes.LOG_OUT:
+      return state.update('user', () => fromJS(action.user));
     default: return state;
   }
 }

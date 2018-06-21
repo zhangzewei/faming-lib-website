@@ -75,5 +75,20 @@ export default [
         }
       }
     },
+  },
+  {
+    path: '/user/login',
+    method: 'POST',
+    config: {
+      handler: controller.login,
+      tags: ['api'],
+      description: '用户登录',
+      validate: {
+        payload: {
+          name: Joi.string().required(),
+          password: Joi.string().required()
+        }
+      }
+    },
   }
 ]

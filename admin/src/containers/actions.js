@@ -24,7 +24,9 @@ export const actionTypes = {
   GET_USERS: 'get users',
   DELETE_USERS: 'delete users',
   GET_CURRENT_USER: 'get current user',
-  ADD_FILE: 'add file'
+  ADD_FILE: 'add file',
+  LOGIN_DONE: 'login done',
+  LOG_OUT: 'log out'
 }
 
 export const getNewsList = title => async dispatch => {
@@ -284,7 +286,7 @@ export const addFile = doc => async dispath => {
   }
 }
 
-export const addPics = doc => async dispatch => {
+export const addPics = doc => async () => {
   try {
     const resp = await axios.post(`/carrousel/add`, { ...doc });
     if (resp.data.res === 'success') {
@@ -297,3 +299,28 @@ export const addPics = doc => async dispatch => {
     openNotificationWithIcon('error', '轮播图', `轮播图添加失败, ${e}`);
   }
 }
+
+export const login = doc => async dispatch => {
+  try {
+    const resp = await axios.post(`/user/login`, { ...doc });
+    if (resp.data.res === 'success') {
+      const user  = resp.data.msg;
+      user.logined = true;
+      localStorage.setItem("user", JSON.stringify(user));
+      dispatch({
+        type: actionTypes.LOGIN_DONE,
+        user
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '登录', `登录失败，${resp.data.msg}`);
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '登录', `登录失败, ${e}`);
+  }
+}
+
+export const logOut = () => ({
+  type: actionTypes.LOG_OUT,
+  user: {}
+})

@@ -1,5 +1,3 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
 import Admin from './containers/Admin';
 import NotMatch from './containers/NotMatch';
 import Login from './containers/Login';

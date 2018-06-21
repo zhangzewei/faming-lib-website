@@ -1,21 +1,43 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Icon, Input, Button } from 'antd';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import * as clientAction from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Base64 } from 'js-base64';
 import './style.css';
 
 const FormItem = Form.Item;
+
+const mapStateToProps = ({Admin}) => {
+  return {
+    state: Admin
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
 
 class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        this.props.actions.login({
+          name: values.name,
+          password: Base64.encode(values.password)
+        });
       }
     });
   }
   render() {
+    const { user } = this.props.state.toJS();
+    if(user && user.logined) {
+      clientAction.openNotificationWithIcon('success', '登录', `欢迎登录${user.name}`)
+      return (<Redirect to="/admin"/>);
+    }
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="login-container">
@@ -24,7 +46,7 @@ class Login extends Component {
             <h2>登录</h2>
           </FormItem>
           <FormItem>
-            {getFieldDecorator('username', {
+            {getFieldDecorator('name', {
               rules: [{ required: true, message: '请填写用户名！' }],
             })(
               <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
@@ -38,16 +60,13 @@ class Login extends Component {
             )}
           </FormItem>
           <FormItem className="login-btns">
-            <Link to="/admin">
-              <Button type="primary" className="login-form-button">
-                登录
-              </Button>
-            </Link>
-            {/* <Link to="/register">
-              <Button className="login-form-button">
-                注册
-              </Button>
-            </Link> */}
+            <Button
+              type="primary"
+              className="login-form-button"
+              htmlType="submit"
+            >
+              登录
+            </Button>
           </FormItem>
         </Form>
       </div>
@@ -57,4 +76,4 @@ class Login extends Component {
 
 const WrappedNormalLoginForm = Form.create()(Login);
 
-export default WrappedNormalLoginForm;
+export default connect(mapStateToProps, mapDispatchToProps)(WrappedNormalLoginForm)

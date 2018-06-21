@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon } from 'antd';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Layout, Menu, Icon, Dropdown } from 'antd';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import * as clientAction from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import LoginMenu from '../LoginMenu';
+import _get from 'lodash/get';
 import DashBoard from '../DashBoard';
 import NewsList from '../NewsList';
 import FileList from '../FileList';
@@ -40,6 +40,13 @@ class App extends Component {
     const selectedMenu =
       nextProps.location.pathname.split('/')[2] || 'dashboard';
     this.setState({ selectedMenu });
+  }
+
+  menuOnClick = ({ key }) => {
+    if(key === 'log-out') {
+      this.props.actions.logOut();
+      window.localStorage.removeItem('user');
+    }
   }
 
   renderSideMenu = () => {
@@ -85,6 +92,21 @@ class App extends Component {
   }
 
   render() {
+    const { user } = this.props.state.toJS();
+    const userJson = window.localStorage.getItem('user');
+    const userInLocalStorage = JSON.parse(userJson);
+    const logined = _get(user, 'logined', '') || _get(userInLocalStorage, 'logined', '');
+    if(!logined) {
+      clientAction.openNotificationWithIcon('error', '登录', '请登录之后访问系统。')
+      return (<Redirect to="/"/>);
+    }
+    const menu = (<Menu
+      onClick={this.menuOnClick}
+    >
+      <Menu.Item key="log-out">
+        登出
+      </Menu.Item>
+    </Menu>);
     return (
       <Layout style={{
         width: '100%',
@@ -107,13 +129,14 @@ class App extends Component {
               flexDirection: 'row-reverse',
             }}
           >
-            <LoginMenu
-              menus={[
-                {text: '登出', link: '/'}
-              ]}
-              userName="张胖胖"
-              logined
-            />
+            <Dropdown
+              overlay={menu}
+              trigger={['hover']}
+            >
+              <div className="login-menu">
+                您好，{user.name || '管理员'}
+              </div>
+            </Dropdown>
           </Header>
           <Content style={{
               margin: '24px 16px',

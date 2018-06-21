@@ -5,6 +5,7 @@ import { Button } from 'antd/lib/radio';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { isEmpty, omit } from 'lodash';
+import { Base64 } from 'js-base64';
 import * as clientAction from '../actions';
 
 const mapStateToProps = ({Admin}) => {
@@ -41,7 +42,7 @@ class UserDetails extends Component {
     if (!isEmpty(currentUser)) {
       this.setState({
         name: currentUser.name,
-        password: currentUser.password,
+        password: Base64.decode(currentUser.password),
         currentUser
       })
     }
@@ -62,9 +63,9 @@ class UserDetails extends Component {
     const { match: { params: { id } }, actions } = this.props;
     if (name && password) {
       if (id && id !== 'createUser') {
-        actions.updateUser(id, { name, password })
+        actions.updateUser(id, { name, password: Base64.encode(password) })
       } else {
-        actions.addUser({ name, password });
+        actions.addUser({ name, password: Base64.encode(password) });
       }
       this.setState({ changed: false });
     } else {

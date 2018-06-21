@@ -1,5 +1,8 @@
-import { getDB } from '../utils/dbUtils';
-
+import { Base64 } from 'js-base64';
+import {
+  getDB,
+  addOneToDBWithoutId,
+} from '../utils/dbUtils';
 const DB = getDB();
 
 // 新闻库
@@ -21,3 +24,11 @@ DB.indices.create({
 DB.indices.create({
   index: 'carrousel',
 });
+
+// 添加超级管理员，在初始化数据库的时候
+addOneToDBWithoutId({
+  name: "超级管理员",
+  authority: "superAdmin",
+  password: Base64.encode('superAdmin'),
+  deleted: 0
+}, 'user');

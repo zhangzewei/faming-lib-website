@@ -62,6 +62,7 @@ class Users extends Component {
           </Button>
           <Button
             type="danger"
+            disabled={record.authority === 'superAdmin'}
             onClick={() => this.deleteUser(record.id)}
           >删除</Button>
         </div>

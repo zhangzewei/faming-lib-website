@@ -4,7 +4,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  background-color: #1890ff;
+  background-color: rgb(11, 61, 109);
 }
 
 .login-form {
@@ -32,4 +32,32 @@
 
 .login-form-button {
   margin: 0 20px;
+}
+
+.login-menu {
+  cursor: pointer;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease 0.3s;
+}
+
+.login-menu:hover {
+  color: #fff;
+  background: #059ff136;
+}
+
+.login-menu_not {
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease 0.3s;
+}
+
+.login-menu_not a {
+  padding: 0 10px;
 }
