@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import $ from 'jquery';
 import * as clientAction from '../actions';
 // Require Editor JS files.
 import 'froala-editor/js/froala_editor.pkgd.min.js';
@@ -67,10 +66,11 @@ class NewsEditer extends Component {
 
   publishNews = () => {
     const { match: { params: { id } }, actions } = this.props;
+    const { user } = this.props.state.toJS();
     if (id === 'createNews') {
       const { title, article } = this.state;
       actions.addNews({
-        creator: 'admin',
+        creator: user.name,
         msg: article,
         title,
         type: 'news'

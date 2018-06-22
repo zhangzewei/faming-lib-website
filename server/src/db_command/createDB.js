@@ -25,6 +25,11 @@ DB.indices.create({
   index: 'carrousel',
 });
 
+// 轮播图库
+DB.indices.create({
+  index: 'menus',
+});
+
 // 添加超级管理员，在初始化数据库的时候
 addOneToDBWithoutId({
   name: "超级管理员",
@@ -32,3 +37,13 @@ addOneToDBWithoutId({
   password: Base64.encode('superAdmin'),
   deleted: 0
 }, 'user');
+
+// 添加超级管理员，在初始化数据库的时候
+addOneToDBWithoutId({
+  menus: {
+    LibMenu: [],
+    ScientificMenu: [],
+    PeopleMenu: [],
+    CompareMenu: [],
+  }
+}, 'menus');

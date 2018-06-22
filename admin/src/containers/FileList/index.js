@@ -45,9 +45,10 @@ class FileList extends Component {
 
   addFile = () => {
     const { link, fileName } = this.state;
+    const { user } = this.props.state.toJS();
     if (link && fileName) {
       this.props.actions.addFile({
-        updater: 'admin',
+        updater: user.name,
         type: 'out',
         title: fileName,
         path: link
@@ -83,6 +84,11 @@ class FileList extends Component {
         key: 'title',
       },
       {
+        title: '上传人',
+        dataIndex: 'updater',
+        key: 'updater',
+      },
+      {
         title: '操作',
         dateIndex: 'action',
         key: 'action',
@@ -90,7 +96,11 @@ class FileList extends Component {
         render: (record) => (
           <div className="list-action">
             <Button>
-              <a href={`http://localhost:4000${record.path}`} download={`下载${record.title}`}>下载</a>
+              <a 
+                href={`http://localhost:4000${record.path}`} 
+                download={`下载${record.title}`}
+                target="_blank"
+              >下载</a>
             </Button>
             <Button
               type="danger"
@@ -148,7 +158,7 @@ class FileList extends Component {
               currentFiles.length >= 1 ? <br /> :
               (
                 <Button>
-                  <Icon type="upload" /> Click to Upload
+                  <Icon type="upload" /> 选择文件
                 </Button>
               )
             }

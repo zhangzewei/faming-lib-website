@@ -9,7 +9,8 @@ const initState = fromJS({
   users: [],
   currentUser: {},
   fileAdded: true,
-  user: {}
+  user: {},
+  menus: {}
 })
 
 export default (state = initState, action) => {
@@ -42,6 +43,12 @@ export default (state = initState, action) => {
       return state.update('user', () => fromJS(action.user));
     case actionTypes.LOG_IN_BY_LOCALSTORAGE:
       return state.update('user', () => fromJS(action.user));
+    case actionTypes.GET_MENUS:
+      return state.update('menus', () => fromJS(action.menus));
+    case actionTypes.UPDATE_MENUS:
+      return state.update('menus', () => fromJS(action.menus));
+    case actionTypes.DELETE_MENU:
+      return state.update('menus', () => fromJS(action.menus));
     default: return state;
   }
 }

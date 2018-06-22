@@ -92,6 +92,11 @@ class NewsList extends Component {
         )
       },
       {
+        title: '发布人',
+        dataIndex: 'creator',
+        key: 'creator',
+      },
+      {
         title: '操作',
         dateIndex: 'action',
         key: 'action',

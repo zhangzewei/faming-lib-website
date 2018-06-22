@@ -27,7 +27,10 @@ export const actionTypes = {
   ADD_FILE: 'add file',
   LOGIN_DONE: 'login done',
   LOG_OUT: 'log out',
-  LOG_IN_BY_LOCALSTORAGE: 'login by localstorage'
+  LOG_IN_BY_LOCALSTORAGE: 'login by localstorage',
+  GET_MENUS: 'get menus',
+  UPDATE_MENUS: 'update menus',
+  DELETE_MENU: 'delete menu',
 }
 
 export const getNewsList = title => async dispatch => {
@@ -333,3 +336,66 @@ export const loginByLocalStorage = user => ({
   type: actionTypes.LOG_IN_BY_LOCALSTORAGE,
   user
 })
+
+export const getMenus = () => async dispatch => {
+  try {
+    const resp = await axios.get(`/menus/`);
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '菜单管理', '获取菜单成功');
+      dispatch({
+        type: actionTypes.GET_MENUS,
+        menus: resp.data.msg[0],
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '菜单管理', '获取菜单失败');
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '菜单管理', `获取菜单失败, ${e}`);
+  }
+}
+
+export const updateMenus = (menusIonfo, doc) => async dispatch => {
+  const menus = menusIonfo.menus;
+  menus[doc.currentTab].push({
+    name: doc.menuName,
+    articleLinkId: doc.articleLinkId,
+    articleTitle: doc.articleTitle,
+  });
+  try {
+    const resp = await axios.post(`/menus/update`, {id: menusIonfo.id, menus});
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '菜单管理', '更新菜单成功');
+      dispatch({
+        type: actionTypes.UPDATE_MENUS,
+        menus: menusIonfo,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '菜单管理', '更新菜单失败');
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '菜单管理', `更新菜单失败, ${e}`);
+  }
+}
+
+export const deleteMenus = (menusIonfo, doc) => async dispatch => {
+  const menus = menusIonfo.menus;
+  const deletedMenus = menus[doc.currentTab].filter(menu => menu.articleLinkId !== doc.articleLinkId);
+  menusIonfo.menus[doc.currentTab] = deletedMenus;
+  try {
+    const resp = await axios.post(`/menus/update`, {id: menusIonfo.id, menus: menusIonfo.menus});
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '菜单管理', '更新菜单成功');
+      dispatch({
+        type: actionTypes.DELETE_MENU,
+        menus: menusIonfo,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '菜单管理', '更新菜单失败');
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '菜单管理', `更新菜单失败, ${e}`);
+  }
+}
