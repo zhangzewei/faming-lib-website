@@ -40,7 +40,10 @@ export const getFileByTitle = async params => {
               }
             }
           }
-        }
+        },
+        sort: [
+          { createTime: 'desc' }
+        ]
       }
     });
     return {

@@ -15,6 +15,7 @@ export default [
           type : Joi.string().required(),
           title: Joi.string().required(),
           path: Joi.string().required(),
+          publish: Joi.string().required(),
         }
       }
     },
