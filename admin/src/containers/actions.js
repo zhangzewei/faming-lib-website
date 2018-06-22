@@ -261,7 +261,7 @@ export const updateUser = (id, doc) => async () => {
 
 export const addUser = doc => async () => {
   try {
-    const resp = await axios.post(`/user/add`, { ...doc, authority: 'admin' });
+    const resp = await axios.post(`/user/add`, { ...doc });
     if (resp.data.res === 'success') {
       openNotificationWithIcon('success', '用户管理', '新增用户信息成功');
     }

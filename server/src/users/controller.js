@@ -6,8 +6,7 @@ import {
   genMatchQuery,
   resolveMultiResults
 } from '../utils/dbUtils';
-import _omit from 'lodash/omit'; 
-import { Base64 } from 'js-base64';
+import _omit from 'lodash/omit';
 
 const DB = getDB();
 

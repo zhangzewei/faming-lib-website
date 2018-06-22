@@ -71,7 +71,8 @@ export default [
         payload: {
           id: Joi.string().required(),
           name: Joi.string().required(),
-          password: Joi.string().required()
+          password: Joi.string().required(),
+          authority: Joi.string().required()
         }
       }
     },

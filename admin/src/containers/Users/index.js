@@ -49,7 +49,7 @@ class Users extends Component {
   );
 
   renderTable = () => {
-    const { users } = this.props.state.toJS();
+    const { users, user } = this.props.state.toJS();
     const columns = [{
       title: '用户名',
       dataIndex: 'name',
@@ -57,7 +57,11 @@ class Users extends Component {
       title: '操作',
       render: (record) => (
         <div className="list-action">
-          <Button>
+          <Button
+            disabled={
+              record.authority === 'superAdmin' && user.authority !== 'superAdmin'
+            }
+          >
             <Link to={`/admin/userEdit/${record.id}`}>编辑</Link>
           </Button>
           <Button
