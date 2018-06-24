@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon ./src/index.js --exec babel-node",
     "server_debug": "nodemon ./src/index.js --exec babel-node --inspect",
-    "createDB": "babel-node ./src/db_command/createDB.js"
+    "createDB": "babel-node ./src/db_command/createDB.js",
+    "deleteDB": "babel-node ./src/db_command/deleteDB.js"
   },
   "author": "",
   "license": "ISC",

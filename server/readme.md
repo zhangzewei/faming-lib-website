@@ -17,3 +17,7 @@
         账户名: 超级管理员
         密码: superAdmin
     ```
+7. 清除数据库
+    ```js
+      yarn deleteDB
+    ```
