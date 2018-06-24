@@ -35,6 +35,7 @@ class NewsEditer extends Component {
       title: '',
       article: '',
       changed: false,
+      fileName: ''
     }
   }
 
@@ -107,11 +108,23 @@ class NewsEditer extends Component {
               placeholderText: '编写新闻',
               editorClass: 'news-editer',
               imageUploadURL: '/news/image/upload',
+              fileUploadURL: '/news/file/upload',
+              fileUseSelectedText: true,
               events: {
                 'froalaEditor.image.uploaded': (_e, _ed, resp) => {
                   return resp;
+                },
+                'froalaEditor.file.beforeUpload': (e, editor, files) =>{
+                  console.log(files[0])
+                  this.fileName = files[0].name;
+                },
+                'froalaEditor.file.uploaded': (e, editor, response) => {
+                  console.log(response)
+                  return `${response}`;
                 }
-              }
+              },
+              imageInsertButtons: ['imageUpload', 'imageByURL'],
+              videoInsertButtons: ['videoByURL']
             }}
           />
         </div>

@@ -96,3 +96,17 @@ export const uploadImageByNews = async request => {
     link: `/images/${imgName}.png`
   };
 }
+
+export const uploadFileByNews = async request => {
+  const { file: { _data, hapi: { filename } } } = request.payload;
+  const fileName = new Date().getTime() + '_' + filename
+  const filePath = path.resolve(__dirname, `../public/images/${fileName}`);
+  const resp = await 
+    fs.writeFileSync(
+      filePath,
+      _data
+    );
+  return {
+    link: `http://localhost:4000/images/${fileName}`
+  };
+}

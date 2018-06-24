@@ -106,6 +106,25 @@ export default [
           file: Joi.any().required(),
         }
       }
-    },
+    }
+  },
+  {
+    path: '/news/file/upload',
+    method: 'POST',
+    config: {
+      handler: controller.uploadFileByNews,
+      tags: ['api'],
+      description: '上传文件在新闻编辑中',
+      payload: { // hapi可以解析上传的form-data
+        output: 'stream',
+        parse: true,
+        allow: 'multipart/form-data'
+      },
+      validate: {
+        payload: {
+          file: Joi.any().required(),
+        }
+      }
+    }
   }
 ]
