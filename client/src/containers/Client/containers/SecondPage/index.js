@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Menu } from 'antd';
 import { Switch, Route } from 'react-router-dom';
 import * as Menus from '../../components/Menus';
+import { renderMenuWithoutSubMenu } from '../../components/Menus';
 import './style.css';
 import NewsPage from '../NewsPage';
 import NewsList from '../NewsList';
@@ -16,11 +17,7 @@ const menuTypeMap = { // 用来对应的页面的标题
   jichujianshe: '基地建设',
   yanjiu: '科学研究',
   lingyu: '研究领域',
-  chengguolunwen: '论文',
-  chengguozhuanli: '专利',
-  chengguozhuanzhu: '专著',
-  chengguohuojiang: '获奖',
-  chengguoqita: '其他',
+  chengguo: '科研成果',
   gongzuo: '工作动态',
   tonggao: '通知公告',
   shuoshi: '硕士招生',
@@ -48,22 +45,21 @@ export default class SecondPage extends Component {
   }
   
   render() {
-    const { state, match: { params: { pageType, menuType, id } } } = this.props;
-    const menuTp = menuType.split(':')[0];
-    const menuName = menuType.split(':')[1];
-    const { currentNews } = state.Client.toJS();
-
+    const { state: { menus }, match: { params: { menuType } } } = this.props;
+    const menuTy = menuType.split(':')[0];
     return (
       <div className="second-page">
         <Row>
           <Col span={5}>
             <div className='menuTitle'>
-              {menuTitle[menuTp]}
+              {menuTitle[menuTy]}
             </div>
 
             <div className='menuUl'>
-              <Menu mode="inline"selectedKeys={[`${menuType}`]}>
-                {Menus[menuTp]()}
+              <Menu
+                mode="inline"
+              >
+                {renderMenuWithoutSubMenu(menus[menuTy])}
               </Menu>
             </div>
           
@@ -71,16 +67,16 @@ export default class SecondPage extends Component {
           <Col span={19}>
             <div className="airticle">
               <div className="airticle-header">
-                <span>{menuTypeMap[menuName]}</span>
+                <span></span>
               </div>
               <div className="airticle-body">
                 <Switch>
                   <Route
-                    path={`/secondPage/news/${menuType}/:id`}
-                    render={(r) => <NewsPage currentNews={currentNews} {...r} />}
+                    path={`/secondPage/news/:id`}
+                    component={NewsPage}
                   />
-                  <Route path={`/secondPage/newsList/${menuType}/:id`} component={NewsList} />
-                  <Route path={`/secondPage/fileList/${menuType}/:id`} component={FileList} />
+                  <Route path={`/secondPage/newsList/:type`} component={NewsList} />
+                  <Route path={`/secondPage/fileList/:type`} component={FileList} />
                 </Switch>
               </div>
             </div>

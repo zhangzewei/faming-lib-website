@@ -1,31 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link, Route, Switch } from 'react-router-dom';
-import { Layout, Row, Col, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import * as clientAction from './actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import NewsList from './containers/NewsList';
 import HomePage from './containers/HomePage';
-import NewsPage from './containers/NewsPage';
-import FileList from './containers/FileList';
 import SecondPage from './containers/SecondPage';
 import {
-  LibMenu,
-  ScientificMenu,
-  NewsMenu,
-  PeopleMenu,
-  CompareMenu,
-  PopulationOfscienceMenu,
-  FileMenu,
+  renderMenus,
 } from './components/Menus';
 import NotMatch from '../NotMatch';
 
 import './style.css';
 
-const { Header, Footer, Sider, Content } = Layout;
-const SubMenu = Menu.SubMenu;
-
+const { Header, Footer, Content } = Layout;
 
 const mapStateToProps = (state) => {
   return {
@@ -51,7 +40,12 @@ class Client extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.actions.getMenuConfig();
+  }
+
   render() {
+    const { menus } = this.props.state.Client.toJS();
     return (
       <Layout>
         <Header className="client-header" style={{ background: '#ecebeb' }} >
@@ -82,31 +76,13 @@ class Client extends Component {
               <Menu.Item key="home">
                 <Link to="/">首页</Link>
               </Menu.Item>
-              <SubMenu title={<Link to="/secondPage/news/LibMenu:gaikuang/gaikuang">实验室概况</Link>}>
-                {LibMenu()}
-              </SubMenu>
-
-                    <SubMenu title={<Link to="/secondPage/news/ScientificMenu:yanjiu/yanjiu">科研平台</Link>}>
-                      {ScientificMenu()}
-                    </SubMenu>
-                    <SubMenu title={<Link to="/secondPage/newsList/NewsMenu:gongzuo/gongzuo">新闻资讯</Link>}>
-                      {NewsMenu()}
-                    </SubMenu>
-
-                    <SubMenu title={<Link to="/secondPage/news/PeopleMenu:shuoshi/shuoshi">人才培养</Link>}>
-                      {PeopleMenu()}
-                    </SubMenu>
-                    <SubMenu title={<Link to="/secondPage/news/CompareMenu:jiaoliu/jiaoliu">合作交流</Link>}>
-                      {CompareMenu()}
-                    </SubMenu>
-
-                    <SubMenu title={<Link to="/secondPage/news/PopulationOfscienceMenu:zhuanzai/zhuanzai">科普宣传</Link>}>
-                      {PopulationOfscienceMenu()}
-                    </SubMenu>
-
-              <SubMenu title={<Link to="/secondPage/fileList/FileMenu:wenzhang/wenzhang">资料下载</Link>}>
-                {FileMenu()}
-              </SubMenu>
+              {renderMenus(menus.LibMenu)}
+              {renderMenus(menus.ScientificMenu)}
+              {renderMenus(menus.NewsMenu)}
+              {renderMenus(menus.PeopleMenu)}
+              {renderMenus(menus.CompareMenu)}
+              {renderMenus(menus.PopulationOfscienceMenu)}
+              {renderMenus(menus.FileMenu)}
               <Menu.Item key="admin">
                 <Link to="/admin/login">内部办公</Link>
               </Menu.Item>
@@ -117,8 +93,8 @@ class Client extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route
-              path="/secondPage/:pageType/:menuType/:id"
-              render={(r) => <SecondPage state={this.props.state} {...r} />}
+              path="/secondPage/:pageType/:menuType"
+              render={(r) => <SecondPage state={this.props.state.Client.toJS()} {...r} />}
             />
             <Route component={NotMatch} />
           </Switch>

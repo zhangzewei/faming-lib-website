@@ -58,8 +58,15 @@ class FileList extends Component {
         title: fileName,
         path: link
       });
+      this.setState({
+        showFileUploader: false,
+        currentFiles: [],
+        link: '',
+        fileName: '',
+        publish: '',
+        type: '',
+      })
     }
-    this.setState({ showFileUploader: false })
   }
 
   renderTableHeader = () => (

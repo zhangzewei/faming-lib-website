@@ -24,7 +24,7 @@ export default class NewsList extends Component {
   }
 
   render (){
-    const { match: { params: { id } }, list } = this.props;
+    const { match: { params: { type } }, list } = this.props;
     const col = [
       {
         title: '标题',
@@ -32,7 +32,6 @@ export default class NewsList extends Component {
         key: 'newsTitle'
       }
     ];
-
     return (
       <div className="news-table">
         <Table dataSource={list} columns={col} />
