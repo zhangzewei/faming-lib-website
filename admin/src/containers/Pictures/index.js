@@ -55,7 +55,6 @@ class Pictures extends Component {
       title: '操作',
       render: (record) => (
         <div className="list-action">
-          <Button>编辑</Button>
           <Button
             type="danger"
             onClick={() => this.deletePic(record.id)}
