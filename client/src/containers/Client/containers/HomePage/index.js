@@ -4,12 +4,12 @@ import NewsPlat from '../NewsPlat';
 import NoticePlat from '../NoticePlat';
 import LoadPlat from '../LoadPlat';
 import ShowPlat from '../ShowPlat';
-import ButtonList from '../ButtonList'
-import LinkList from '../LinkList'
-import CarouselBox from '../CarouselBox'
-import ImgSlid from '../ImgSlid'
+import ButtonList from '../ButtonList';
+import LinkList from '../LinkList';
+import CarouselBox from '../CarouselBox';
+import ImgSlid from '../ImgSlid';
 
-import './index.css'
+import './index.css';
 
 export default class HomePage extends Component {
   render() {
@@ -36,7 +36,6 @@ export default class HomePage extends Component {
           <Col sm={{ span: 24 }} lg={{ span: 8 }}>
             <NoticePlat />
           </Col>
-
         </Row>
       </section>,
       <section key="section3" >
@@ -48,14 +47,12 @@ export default class HomePage extends Component {
           <Col className='teamTitle-line' sm={{ span: 20 }} lg={{ span: 20 }}></Col>
         </Row>
         <Row>
-
           <Col sm={{ span: 24 }} lg={{ span: 16 }}>
             <ShowPlat />
           </Col>
           <Col sm={{ span: 24 }} lg={{ span: 8 }}>
             <ButtonList />
           </Col>
-
         </Row>
         <Row>
           <Col sm={{ span: 48 }} lg={{ span: 24 }}>

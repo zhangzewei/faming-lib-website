@@ -76,13 +76,13 @@ class Client extends Component {
               <Menu.Item key="home">
                 <Link to="/">首页</Link>
               </Menu.Item>
-              {renderMenus(menus.LibMenu)}
-              {renderMenus(menus.ScientificMenu)}
-              {renderMenus(menus.NewsMenu)}
-              {renderMenus(menus.PeopleMenu)}
-              {renderMenus(menus.CompareMenu)}
-              {renderMenus(menus.PopulationOfscienceMenu)}
-              {renderMenus(menus.FileMenu)}
+              {renderMenus(menus.LibMenu, 'LibMenu')}
+              {renderMenus(menus.ScientificMenu, 'ScientificMenu')}
+              {renderMenus(menus.NewsMenu, 'NewsMenu')}
+              {renderMenus(menus.PeopleMenu, 'PeopleMenu')}
+              {renderMenus(menus.CompareMenu, 'CompareMenu')}
+              {renderMenus(menus.PopulationOfscienceMenu, 'PopulationOfscienceMenu')}
+              {renderMenus(menus.FileMenu, 'FileMenu')}
               <Menu.Item key="admin">
                 <Link to="/admin/login">内部办公</Link>
               </Menu.Item>
