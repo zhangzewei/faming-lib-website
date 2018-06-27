@@ -4,6 +4,7 @@ import { actionTypes } from './actions';
 const initState = fromJS({
   currentNews: {},
   menus: {},
+  carousel: [],
 })
 
 export default (state = initState, action) => {
@@ -11,7 +12,9 @@ export default (state = initState, action) => {
     case actionTypes.GET_CURRENT_NEWS:
       return state.update('currentNews', () => fromJS(action.currentNews));
     case actionTypes.GET_MENUS: 
-      return state.update('menus', () => fromJS(action.menus))
+      return state.update('menus', () => fromJS(action.menus));
+    case actionTypes.GET_CAROUSEL:
+      return state.update('carousel', () => fromJS(action.carousel));
     default: return state;
   }
 }

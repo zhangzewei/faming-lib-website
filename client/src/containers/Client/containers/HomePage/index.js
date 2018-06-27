@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as clientAction from '../../actions';
 import NewsPlat from '../NewsPlat';
 import NoticePlat from '../NoticePlat';
 import LoadPlat from '../LoadPlat';
@@ -11,13 +14,25 @@ import ImgSlid from '../ImgSlid';
 
 import './index.css';
 
-export default class HomePage extends Component {
+const mapStateToProps = ({Client}) => {
+  return {
+    state: Client
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
+
+class HomePage extends Component {
   render() {
+    const { carousel } = this.props.state.toJS();
     return [
       <section key="section1" className="section1 section">
         <Row>
           <Col sm={{ span: 24 }} lg={{ span: 16 }}>
-            <CarouselBox />
+            <CarouselBox carousel={carousel} />
           </Col>
           <Col sm={{ span: 24 }} lg={{ span: 8 }}>
             <NewsPlat />
@@ -62,4 +77,7 @@ export default class HomePage extends Component {
       </section>
     ];
   }
-} 
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

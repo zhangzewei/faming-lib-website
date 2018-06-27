@@ -1,9 +1,21 @@
 import axios from 'axios';
-import { articles } from './constents';
+import { notification } from 'antd';
+
+notification.config({
+  duration: 2,
+});
+
+export const openNotificationWithIcon = (type, message, description) => {
+  notification[type]({
+    message,
+    description,
+  });
+};
 
 export const actionTypes = {
   GET_CURRENT_NEWS: 'get current news',
-  GET_MENUS: 'get menus'
+  GET_MENUS: 'get menus',
+  GET_CAROUSEL: 'get carousel',
 }
 
 export const getCurrentNews = (id) => async dispatch => {
@@ -15,6 +27,7 @@ export const getCurrentNews = (id) => async dispatch => {
     });
   } catch(e) {
     console.log(e)
+    openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);
   }
 }
 
@@ -64,6 +77,18 @@ export const getMenuConfig = () => async dipatch => {
       menus: menusWithLink
     });
   } catch(e) {
-    console.log(e);
+    openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);
+  }
+}
+
+export const getCarouselPics = () => async dispatch => {
+  try {
+    const resp = await axios.get('/carrousel/list/*');
+    dispatch({
+      type: actionTypes.GET_CAROUSEL,
+      carousel: resp.data.msg,
+    })
+  } catch(e) {
+    openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);
   }
 }

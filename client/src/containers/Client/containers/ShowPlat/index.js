@@ -19,7 +19,6 @@ export default class ShowPlat extends Component {
             </Link>
           );
         }
-        
       });
     
     render() {
@@ -29,15 +28,12 @@ export default class ShowPlat extends Component {
            {imgUrl:'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=213776902,2553591347&fm=27&gp=0.jpg',showConent:'现为农业部杂粮加工重点实验室主任，国家杂粮加工技术研发分中心主任，国家现代农业产业技术体系（燕麦荞麦）岗位科学家，成都荞麦产业化工程技术研究中心主任，中国农学会荞麦燕麦分会常务理事会副会长',link:'/secondPage/news/LibMenu:lingdao/lingdao'},
            {imgUrl:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1643936284,430120172&fm=27&gp=0.jpg',showConent:'实验室目前固定人员为36名，其中高级职称23人，拥有博士学位24人，享受国务院政府特殊津贴2人，国家产业岗位科学家2人，四川省产业岗位科学家2人，四川省有突出贡献的优秀专家1人，四川省学术与技术带头人2人，四川省学术与技术带头人后备人选6人，四川省食品安全专家2人。',link:'/secondPage/news/LibMenu:lingdao/lingdao'},
            {imgUrl:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3297658440,588875764&fm=27&gp=0.jpg',showConent:'成都大学特色杂粮研究团队一直致力于特色杂粮的研究工作，主要围绕苦荞、藜麦、燕麦等特色杂粮的新品种选育、优质高产栽培、产品开发及精深加工与综合利用，以及药用功效评价等方面开展研究。',link:'/secondPage/news/LibMenu:lingdao/lingdao'}
-            
           ];
-
-
       return (
         <div className='showPlat'>
-            <ul className='showPlat-ul'>
-                {this.genShowList(list)}
-            </ul>
+          <ul className='showPlat-ul'>
+            {this.genShowList(list)}
+          </ul>
         </div>
       )
     }

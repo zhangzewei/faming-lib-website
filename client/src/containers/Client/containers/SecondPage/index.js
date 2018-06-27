@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col, Menu } from 'antd';
 import { Switch, Route } from 'react-router-dom';
-import * as Menus from '../../components/Menus';
 import { renderMenuWithoutSubMenu } from '../../components/Menus';
 import './style.css';
 import NewsPage from '../NewsPage';

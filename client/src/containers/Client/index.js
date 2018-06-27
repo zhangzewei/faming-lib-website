@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import * as clientAction from './actions';
@@ -42,6 +42,7 @@ class Client extends Component {
 
   componentDidMount() {
     this.props.actions.getMenuConfig();
+    this.props.actions.getCarouselPics();
   }
 
   render() {
@@ -89,6 +90,7 @@ class Client extends Component {
             </Menu>
           </div>
         </Header>
+
         <Content className="client-container">
           <Switch>
             <Route path="/" exact component={HomePage} />
@@ -99,6 +101,7 @@ class Client extends Component {
             <Route component={NotMatch} />
           </Switch>
         </Content>
+
         <Footer className="client-footer">
           <div className='footerLink'>
             <ul>
