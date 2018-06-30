@@ -5,6 +5,7 @@ const initState = fromJS({
   currentNews: {},
   menus: {},
   carousel: [],
+  fileList: [],
 })
 
 export default (state = initState, action) => {
@@ -15,6 +16,8 @@ export default (state = initState, action) => {
       return state.update('menus', () => fromJS(action.menus));
     case actionTypes.GET_CAROUSEL:
       return state.update('carousel', () => fromJS(action.carousel));
+    case actionTypes.GET_FILELIST:
+      return state.update('fileList', () => fromJS(action.fileList));
     default: return state;
   }
 }

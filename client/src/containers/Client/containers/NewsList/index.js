@@ -34,7 +34,11 @@ export default class NewsList extends Component {
     ];
     return (
       <div className="news-table">
-        <Table dataSource={list} columns={col} />
+        <Table
+          dataSource={list}
+          columns={col}
+          rowKey="id"
+        />
       </div>
     );
   }

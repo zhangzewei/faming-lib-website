@@ -80,3 +80,44 @@ export const uploadFile = async request => {
     link: `/files/${time}-${fileName}`
   };
 }
+
+export const getFileClientList = async request => {
+  const { type } = request.params;
+  try {
+    const resp = await DB.search({
+      index: 'file',
+      type: 'data',
+      body: {
+        query: {
+          bool: {
+            must_not: {
+              term: {
+                deleted: 1 // 搜索对应没有删除的，删除的为1，没删除的为0
+              }
+            },
+            must: [
+              {
+            		term: { type }
+            	},
+            	{
+            		term: { 'publish.keyword': 'forOut' }
+            	}
+            ]
+          }
+        },
+        sort: [
+          { createTime: 'desc' }
+        ]
+      }
+    });
+    return {
+      res: 'success',
+      msg: resolveMultiResults(resp),
+    }
+  } catch(err) {
+    return {
+      res: 'error',
+      msg: err
+    }
+  }
+}

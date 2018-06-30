@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table, Button } from 'antd';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as clientAction from '../../actions';
 
-export default class FileList extends Component {
+const mapStateToProps = ({Client}) => {
+  return {
+    state: Client
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
+
+class FileList extends Component {
   static propTypes = {
     list: PropTypes.array,
   }
@@ -20,30 +34,58 @@ export default class FileList extends Component {
     ]
   }
 
+  componentDidMount() {
+    const { actions, match: { params: { type } } } = this.props;
+    const fileListType = type.split(':')[1];
+    this.listType = fileListType;
+    actions.getFileList(fileListType);
+  }
+
+  // 切换路由参数的时候进行数据更新
+  componentWillReceiveProps(nextProps) {
+    const { match: { params: { type } } } = nextProps;
+    const fileListType = type.split(':')[1];
+    if (this.listType !== type) {
+      this.listType = fileListType;
+      this.props.actions.getFileList(fileListType);
+    }
+  }
+
   render (){
-    const { list } = this.props;
-    console.log(this.props.list)
+    const { fileList } = this.props.state.toJS();
     const col = [
       {
         title: '标题',
-        dataIndex: 'fileTitle',
-        key: 'fileTitle',
+        dataIndex: 'title',
+        key: 'title',
       },
       {
         title: '操作',
         dateIndex: 'action',
         key: 'action',
         width: '200px',
-        render: () => (
-          <Button>下载</Button>
+        render: record => (
+          <Button>
+            <a 
+              href={`http://localhost:4000${record.path}`} 
+              download={`下载${record.title}`}
+              target="_blank"
+            >下载</a>
+          </Button>
         )
       }
     ];
 
     return (
       <div className="news-table">
-        <Table dataSource={list} columns={col} />
+        <Table
+          dataSource={fileList}
+          columns={col}
+          rowKey="id"
+        />
       </div>
     );
   }
 } 
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileList);

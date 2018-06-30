@@ -62,5 +62,19 @@ export default [
         }
       }
     },
-  }
+  },
+  {
+    path: '/file/clientlist/{type}',
+    method: 'GET',
+    config: {
+      handler: controller.getFileClientList,
+      tags: ['api'],
+      description: '在客户端获取文件列表',
+      validate: {
+        params: {
+          type: Joi.string().required(),
+        }
+      }
+    },
+  },
 ]

@@ -23,8 +23,8 @@ const menuTypeMap = { // 用来对应的页面的标题
   daoshi: '导师介绍',
   jiaoliu: '合作企业',
   zhuanzai: '转载文章',
-  wenzhang: '文章下载',
-  lunwenxiazai: '论文下载',
+  article: '文章下载',
+  lunwen: '论文下载',
 }
 
 const menuTitle = {
