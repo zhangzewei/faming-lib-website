@@ -16,7 +16,8 @@ export const actionTypes = {
   GET_CURRENT_NEWS: 'get current news',
   GET_MENUS: 'get menus',
   GET_CAROUSEL: 'get carousel',
-  GET_FILELIST: 'get filelist'
+  GET_FILELIST: 'get filelist',
+  GET_NEWSLIST: 'get newslist'
 }
 
 export const getCurrentNews = (id) => async dispatch => {
@@ -100,6 +101,18 @@ export const getFileList = type => async dispatch => {
     dispatch({
       type: actionTypes.GET_FILELIST,
       fileList: resp.data.msg,
+    })
+  } catch(e) {
+    openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);
+  }
+}
+
+export const getNewsList = type => async dispatch => {
+  try {
+    const resp = await axios.get(`/news/listByType/${type}`);
+    dispatch({
+      type: actionTypes.GET_NEWSLIST,
+      newsList: resp.data.msg,
     })
   } catch(e) {
     openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);

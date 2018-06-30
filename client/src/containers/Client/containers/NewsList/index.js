@@ -1,41 +1,66 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'antd';
-import './style.css'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
+import * as clientAction from '../../actions';
+import './style.css';
 
-export default class NewsList extends Component {
+const mapStateToProps = ({Client}) => {
+  return {
+    state: Client
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(clientAction, dispatch)
+  }
+}
+
+class NewsList extends Component {
   static propTypes = {
     match: PropTypes.object, // 这个是路由提供的参数，可以拿到路由带过来的参数
-    list: PropTypes.array,
   }
 
-  static defaultProps = {
-    list: [
-      {
-        newsTitle: '新闻1'
-      },
-      {
-        newsTitle: '新闻2'
-      },
-      {
-        newsTitle: '新闻3'
-      },
-    ]
+  componentDidMount() {
+    const { match: { params: { type } } } = this.props;
+    const currentType = type.split(':')[1];
+    this.type = currentType;
+    this.props.actions.getNewsList(currentType);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match: { params: { type } } } = nextProps;
+    const currentType = type.split(':')[1];
+    if (currentType !== this.type) {
+      this.type = currentType;
+      this.props.actions.getNewsList(currentType);
+    }
   }
 
   render (){
-    const { match: { params: { type } }, list } = this.props;
+    const { match: { params: { type } } } = this.props;
+    const { newsList } = this.props.state.toJS();
+    const typePlaceholder = type.split(':')[0];
     const col = [
       {
         title: '标题',
-        dataIndex: 'newsTitle',
-        key: 'newsTitle'
+        dataIndex: 'title',
+        key: 'title',
+        render: (_, record) => {
+          return (
+            <Link to={`/secondPage/news/${typePlaceholder}:${record.id}`}>
+            {record.title}
+          </Link>
+          )
+        }
       }
     ];
     return (
       <div className="news-table">
         <Table
-          dataSource={list}
+          dataSource={newsList}
           columns={col}
           rowKey="id"
         />
@@ -43,3 +68,5 @@ export default class NewsList extends Component {
     );
   }
 } 
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsList)

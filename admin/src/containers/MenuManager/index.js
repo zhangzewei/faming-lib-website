@@ -32,7 +32,7 @@ class MenuManager extends Component {
 
   componentDidMount() {
     this.props.actions.getMenus();
-    this.props.actions.getNewsList('*')
+    this.props.actions.getNewsListByType('forMenu');
   }
 
   changeTab = key => {

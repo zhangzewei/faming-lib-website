@@ -64,7 +64,7 @@ class FileList extends Component {
         dateIndex: 'action',
         key: 'action',
         width: '200px',
-        render: record => (
+        render: (_, record) => (
           <Button>
             <a 
               href={`http://localhost:4000${record.path}`} 

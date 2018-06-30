@@ -12,9 +12,10 @@ import 'froala-editor/css/froala_editor.pkgd.min.css';
 // Require Font Awesome.
 import 'font-awesome/css/font-awesome.css';
 import FroalaEditor from 'react-froala-wysiwyg';
-import { Input, Button } from 'antd';
+import { Input, Button, Select } from 'antd';
 import { isEmpty, omit } from 'lodash';
-import './style.css'
+import './style.css';
+const Option = Select.Option;
 
 
 const mapStateToProps = ({Admin}) => {
@@ -35,7 +36,8 @@ class NewsEditer extends Component {
       title: '',
       article: '',
       changed: false,
-      fileName: ''
+      fileName: '',
+      type: 'forMenu'
     }
   }
 
@@ -52,6 +54,7 @@ class NewsEditer extends Component {
       this.setState({
         title: editNews.title,
         article: editNews.msg,
+        type: editNews.type,
         editNews
       })
     }
@@ -68,19 +71,24 @@ class NewsEditer extends Component {
   publishNews = () => {
     const { match: { params: { id } }, actions } = this.props;
     const { user } = this.props.state.toJS();
-    if (id === 'createNews') {
-      const { title, article } = this.state;
-      actions.addNews({
-        creator: user.name,
-        msg: article,
-        title,
-        type: 'news'
-      })
+    const { editNews, title, article, type } = this.state;
+    
+    if (title && article) {
+      if (id === 'createNews') {
+        const { title, article } = this.state;
+        actions.addNews({
+          creator: user.name,
+          msg: article,
+          title,
+          type
+        })
+      } else {
+        editNews.title = title;
+        editNews.msg = article;
+        actions.updateNews(omit(editNews, ['id', 'visitTimes', 'deleted', 'createTime']), id);
+      }
     } else {
-      const { editNews, title, article } = this.state;
-      editNews.title = title;
-      editNews.msg = article;
-      actions.updateNews(omit(editNews, ['id', 'visitTimes', 'deleted', 'createTime']), id);
+      clientAction.openNotificationWithIcon('error', '新闻编辑', '新闻标题或者内容不能为空。')
     }
   }
 
@@ -96,6 +104,22 @@ class NewsEditer extends Component {
             >发布新闻</Button>
           </div>
           <Input value={this.state.title} onChange={this.onTitleChange} />  
+        </div>
+        <div className="editer-item">
+          <div className="editer-item_title">
+            <span>新闻类型</span> 
+          </div>
+          <Select
+            allowClear
+            style={{ width: '100%' }}
+            onSelect={key => this.setState({ type: key })}
+            value={this.state.type}
+          >
+            <Option key="forMenu">菜单使用文章（主要使用在制作并且能够链接到对应文章的菜单）</Option>
+            <Option key="gongzuo">工作动态（对应工作动态模块）</Option>
+            <Option key="tonggao">通知公告（对应通知公告）</Option>
+            <Option key="zhuanzai">转载文章（对应转载文章）</Option>
+          </Select>
         </div>
         <div className="editer-item">
           <div className="editer-item_title">新闻内容</div>

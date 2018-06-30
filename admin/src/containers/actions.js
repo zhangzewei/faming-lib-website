@@ -399,3 +399,21 @@ export const deleteMenus = (menusIonfo, doc) => async dispatch => {
     openNotificationWithIcon('error', '菜单管理', `更新菜单失败, ${e}`);
   }
 }
+
+export const getNewsListByType = type => async dispatch => {
+  try {
+    const resp = await axios.get(`/news/listByType/${type}`);
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '新闻列表', '获取新闻列表成功');
+      dispatch({
+        type: actionTypes.GET_NEWS_LIST,
+        list: resp.data.msg
+      });
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '新闻列表', '获取列表失败');
+    }
+  } catch (e) {
+    openNotificationWithIcon('error', '新闻列表', '获取列表失败');
+  }
+}

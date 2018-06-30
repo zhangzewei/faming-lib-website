@@ -30,7 +30,17 @@ class NewsPage extends Component {
   componentDidMount() {
     const { match: { params: { id } } } = this.props;
     const currentId = id.split(':')[1];
+    this.article = currentId;
     this.props.actions.getCurrentNews(currentId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match: { params: { id } } } = nextProps;
+    const currentId = id.split(':')[1];
+    if (currentId !== this.article) {
+      this.article = currentId;
+      this.props.actions.getCurrentNews(currentId);
+    }
   }
 
   render (){

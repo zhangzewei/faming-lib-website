@@ -126,5 +126,19 @@ export default [
         }
       }
     }
-  }
+  },
+  {
+    path: '/news/listByType/{type}',
+    method: 'GET',
+    config: {
+      handler: controller.getNewByType,
+      tags: ['api'],
+      description: '根据类型搜索新闻',
+      validate: {
+        params: {
+          type: Joi.string().required(),
+        }
+      }
+    },
+  },
 ]

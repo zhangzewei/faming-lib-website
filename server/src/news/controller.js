@@ -110,3 +110,41 @@ export const uploadFileByNews = async request => {
     link: `http://localhost:4000/images/${fileName}`
   };
 }
+
+export const getNewByType = async request => {
+  const { type } = request.params;
+  try {
+    const resp = await DB.search({
+      index: 'news',
+      type: 'data',
+      body: {
+        query: {
+          bool: {
+            must_not: {
+              term: {
+                deleted: 1 // 搜索对应没有删除的，删除的为1，没删除的为0
+              }
+            },
+            must: [
+              {
+            		term: { 'type.keyword': type }
+            	}
+            ]
+          }
+        },
+        sort: [
+          { createTime: 'desc' }
+        ]
+      }
+    });
+    return {
+      res: 'success',
+      msg: resolveMultiResults(resp),
+    }
+  } catch(err) {
+    return {
+      res: 'error',
+      msg: err
+    }
+  }
+}
