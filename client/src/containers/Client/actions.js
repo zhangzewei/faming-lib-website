@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { notification } from 'antd';
+import _get from 'lodash/get';
 
 notification.config({
   duration: 2,
@@ -17,7 +18,8 @@ export const actionTypes = {
   GET_MENUS: 'get menus',
   GET_CAROUSEL: 'get carousel',
   GET_FILELIST: 'get filelist',
-  GET_NEWSLIST: 'get newslist'
+  GET_NEWSLIST: 'get newslist',
+  GET_HOME_NEWS_LIST: 'get home news list',
 }
 
 export const getCurrentNews = (id) => async dispatch => {
@@ -113,6 +115,25 @@ export const getNewsList = type => async dispatch => {
     dispatch({
       type: actionTypes.GET_NEWSLIST,
       newsList: resp.data.msg,
+    })
+  } catch(e) {
+    openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);
+  }
+}
+
+export const getHomePageNewsList = () => async dispatch => {
+  try {
+    const gongzuo = await axios.get(`/news/listByType/gongzuo`); // 获取首页工作资讯
+    const tonggao = await axios.get(`/news/listByType/tonggao`); // 获取首页通告资讯
+    const gongzuoList = _get(gongzuo, ['data', 'msg'], []).splice(0, 6);
+    const tonggaoList = _get(tonggao, ['data', 'msg'], []).splice(0, 6);
+    const homeNewsList = {
+      gongzuoList,
+      tonggaoList
+    };
+    dispatch({
+      type: actionTypes.GET_HOME_NEWS_LIST,
+      homeNewsList
     })
   } catch(e) {
     openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);

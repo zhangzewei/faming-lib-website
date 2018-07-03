@@ -119,6 +119,7 @@ class NewsEditer extends Component {
             <Option key="gongzuo">工作动态（对应工作动态模块）</Option>
             <Option key="tonggao">通知公告（对应通知公告）</Option>
             <Option key="zhuanzai">转载文章（对应转载文章）</Option>
+            <Option key="chengguo">科研成果</Option>
           </Select>
         </div>
         <div className="editer-item">

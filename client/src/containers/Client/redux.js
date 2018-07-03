@@ -6,7 +6,11 @@ const initState = fromJS({
   menus: {},
   carousel: [],
   fileList: [],
-  newsList : []
+  newsList : [],
+  homeNewsList: {
+    gongzuoList: [],
+    tonggaoList: [],
+  }
 })
 
 export default (state = initState, action) => {
@@ -21,6 +25,8 @@ export default (state = initState, action) => {
       return state.update('fileList', () => fromJS(action.fileList));
     case actionTypes.GET_NEWSLIST: 
       return state.update('newsList', () => fromJS(action.newsList));
+    case actionTypes.GET_HOME_NEWS_LIST:
+      return state.update('homeNewsList', () => fromJS(action.homeNewsList));
     default: return state;
   }
 }

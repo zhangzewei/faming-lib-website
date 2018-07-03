@@ -4,6 +4,7 @@ import { Table } from 'antd';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import * as clientAction from '../../actions';
 import './style.css';
 
@@ -55,7 +56,15 @@ class NewsList extends Component {
           </Link>
           )
         }
-      }
+      },
+      {
+        title: '发布时间',
+        dataIndex: 'createTime',
+        key: 'createTime',
+        render: (text) => (
+          <span>{moment(text).format('l')}</span>
+        )
+      },
     ];
     return (
       <div className="news-table">

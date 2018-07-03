@@ -8,25 +8,6 @@ import NewsPage from '../NewsPage';
 import NewsList from '../NewsList';
 import FileList from '../FileList';
 
-const menuTypeMap = { // 用来对应的页面的标题
-  gaikuang: '实验室概况',
-  lingdao: '领导',
-  tuandui: '团队介绍',
-  jigou: '机构设置',
-  jichujianshe: '基地建设',
-  yanjiu: '科学研究',
-  lingyu: '研究领域',
-  chengguo: '科研成果',
-  gongzuo: '工作动态',
-  tonggao: '通知公告',
-  shuoshi: '硕士招生',
-  daoshi: '导师介绍',
-  jiaoliu: '合作企业',
-  zhuanzai: '转载文章',
-  article: '文章下载',
-  lunwen: '论文下载',
-}
-
 const menuTitle = {
   LibMenu: '实验室概况',
   ScientificMenu: '科研平台',

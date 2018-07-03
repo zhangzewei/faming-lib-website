@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Page404 from './images/404.png';
 import './style.css';
 

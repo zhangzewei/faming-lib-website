@@ -26,8 +26,11 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class HomePage extends Component {
+  componentDidMount() {
+    this.props.actions.getHomePageNewsList();
+  }
   render() {
-    const { carousel } = this.props.state.toJS();
+    const { carousel, menus, homeNewsList: { tonggaoList, gongzuoList } } = this.props.state.toJS();
     return [
       <section key="section1" className="section1 section">
         <Row>
@@ -35,7 +38,7 @@ class HomePage extends Component {
             <CarouselBox carousel={carousel} />
           </Col>
           <Col sm={{ span: 24 }} lg={{ span: 8 }}>
-            <NewsPlat />
+            <NewsPlat list={gongzuoList} />
           </Col>
         </Row>
       </section>,
@@ -49,7 +52,7 @@ class HomePage extends Component {
             <ShowPlat />
           </Col>
           <Col sm={{ span: 24 }} lg={{ span: 8 }}>
-            <NoticePlat />
+            <NoticePlat list={tonggaoList} />
           </Col>
         </Row>
       </section>,
@@ -66,7 +69,7 @@ class HomePage extends Component {
             <ShowPlat />
           </Col>
           <Col sm={{ span: 24 }} lg={{ span: 8 }}>
-            <ButtonList />
+            <ButtonList menus={menus} />
           </Col>
         </Row>
         <Row>

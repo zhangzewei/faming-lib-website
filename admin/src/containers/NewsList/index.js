@@ -28,23 +28,6 @@ class NewsList extends Component {
 
   static contextTypes = {
     actions: PropTypes.object
-  };
-
-  static defaultProps = {
-    list: [
-      {
-        key: 'news1',
-        title: '新闻1'
-      },
-      {
-        key: 'news2',
-        title: '新闻2'
-      },
-      {
-        key: 'news3',
-        title: '新闻3'
-      },
-    ]
   }
 
   componentDidMount() {
