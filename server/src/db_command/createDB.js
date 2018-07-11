@@ -25,9 +25,14 @@ DB.indices.create({
   index: 'carrousel',
 });
 
-// 轮播图库
+// 菜单配置
 DB.indices.create({
   index: 'menus',
+});
+
+// 小轮播图库
+DB.indices.create({
+  index: 'carousellittle',
 });
 
 // 添加超级管理员，在初始化数据库的时候

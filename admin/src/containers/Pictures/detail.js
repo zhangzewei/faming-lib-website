@@ -53,6 +53,7 @@ class PicsDetails extends Component {
   handleChange = ({ fileList }) => {
     this.setState({ fileList });
   }
+  
   handleCancel = () => this.setState({ previewVisible: false });
 
   updateImage = () => {

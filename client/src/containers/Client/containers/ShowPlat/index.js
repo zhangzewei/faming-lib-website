@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
-
+import cuid from 'cuid';
 
 import './style.css';
 
@@ -9,7 +8,7 @@ export default class ShowPlat extends Component {
   genShowList = ls => ls.map((item, index) => {
     if (index < 3) {
       return (
-        <Link to={item.link}>
+        <Link to={item.link} key={cuid()}>
           <li key={index} className="list-show">
             <img src={item.imgUrl} alt="暂时没有图片" className="list-showConentImg" />
             <span className="list-showConent">{item.showConent}</span>

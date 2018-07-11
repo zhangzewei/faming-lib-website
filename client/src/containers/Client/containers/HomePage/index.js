@@ -30,7 +30,12 @@ class HomePage extends Component {
     this.props.actions.getHomePageNewsList();
   }
   render() {
-    const { carousel, menus, homeNewsList: { tonggaoList, gongzuoList } } = this.props.state.toJS();
+    const {
+      carousel,
+      menus,
+      homeNewsList: { tonggaoList, gongzuoList },
+      carouselLittle
+    } = this.props.state.toJS();
     return [
       <section key="section1" className="section1 section">
         <Row>
@@ -57,7 +62,7 @@ class HomePage extends Component {
         </Row>
       </section>,
       <section key="section3" >
-        <ImgSlid />
+        <ImgSlid imgList={carouselLittle} />
       </section>,
       <section key="section4" className='section4' >
         <Row>

@@ -31,6 +31,7 @@ export const actionTypes = {
   GET_MENUS: 'get menus',
   UPDATE_MENUS: 'update menus',
   DELETE_MENU: 'delete menu',
+  GET_CAROUSEL: 'get carousel',
 }
 
 export const getNewsList = title => async dispatch => {
@@ -290,13 +291,13 @@ export const addFile = doc => async dispath => {
   }
 }
 
-export const addPics = doc => async dispath => {
+export const addPics = doc => async dispatch => {
   try {
     const resp = await axios.post(`/carrousel/add`, { ...doc });
     if (resp.data.res === 'success') {
       openNotificationWithIcon('success', '轮播图', '轮播图添加成功');
       setTimeout(() => {
-        dispath(getPics('*'))
+        dispatch(getPics('*'))
       }, 1000);
     }
     if (resp.data.res === 'error') {
@@ -415,5 +416,57 @@ export const getNewsListByType = type => async dispatch => {
     }
   } catch (e) {
     openNotificationWithIcon('error', '新闻列表', '获取列表失败');
+  }
+}
+
+export const getCarousel = () => async dispatch => {
+  try {
+    const resp = await axios.get('/carousel/littleList');
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '小轮播图', '获取小轮播图成功');
+      dispatch({
+        type: actionTypes.GET_CAROUSEL,
+        carousel: resp.data.msg,
+      })
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '小轮播图', '获取列表失败');
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '小轮播图', '小轮播图添加失败');
+  }
+}
+
+export const addCarsouel = img => async dispatch => {
+  try {
+    const resp = await axios.post('/carousel/little', { img });
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '小轮播图', '添加小轮播图成功');
+      setTimeout(() => {
+        dispatch(getCarousel())
+      }, 1000);
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '小轮播图', '添加小轮播图失败');
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '小轮播图', '小轮播图添加失败');
+  }
+}
+
+export const deleteCarousel = id => async dispatch => {
+  try {
+    const resp = await axios.post('/carousel/delete', { id });
+    if (resp.data.res === 'success') {
+      openNotificationWithIcon('success', '小轮播图', '删除小轮播图成功');
+      setTimeout(() => {
+        dispatch(getCarousel())
+      }, 1000);
+    }
+    if (resp.data.res === 'error') {
+      openNotificationWithIcon('error', '小轮播图', '获取列表失败');
+    }
+  } catch(e) {
+    openNotificationWithIcon('error', '小轮播图', '小轮播图添加失败');
   }
 }

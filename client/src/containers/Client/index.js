@@ -43,6 +43,7 @@ class Client extends Component {
   componentDidMount() {
     this.props.actions.getMenuConfig();
     this.props.actions.getCarouselPics();
+    this.props.actions.getCarouselLittle();
   }
 
   render() {

@@ -20,6 +20,7 @@ export const actionTypes = {
   GET_FILELIST: 'get filelist',
   GET_NEWSLIST: 'get newslist',
   GET_HOME_NEWS_LIST: 'get home news list',
+  GET_CAROUSEL_LITTLE: 'get carousel little',
 }
 
 export const getCurrentNews = (id) => async dispatch => {
@@ -134,6 +135,18 @@ export const getHomePageNewsList = () => async dispatch => {
     dispatch({
       type: actionTypes.GET_HOME_NEWS_LIST,
       homeNewsList
+    })
+  } catch(e) {
+    openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);
+  }
+}
+
+export const getCarouselLittle = () => async dispatch => {
+  try {
+    const resp = await axios.get(`/carousel/littleList`); // 获取首页工作资讯
+    dispatch({
+      type: actionTypes.GET_CAROUSEL_LITTLE,
+      carouselLittle: resp.data.msg,
     })
   } catch(e) {
     openNotificationWithIcon('error', '出错了', `${JSON.stringify(e)}`);

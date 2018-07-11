@@ -10,7 +10,8 @@ const initState = fromJS({
   currentUser: {},
   fileAdded: true,
   user: {},
-  menus: {}
+  menus: {},
+  carousel: []
 })
 
 export default (state = initState, action) => {
@@ -49,6 +50,8 @@ export default (state = initState, action) => {
       return state.update('menus', () => fromJS(action.menus));
     case actionTypes.DELETE_MENU:
       return state.update('menus', () => fromJS(action.menus));
+    case actionTypes.GET_CAROUSEL:
+      return state.update('carousel', () => fromJS(action.carousel));
     default: return state;
   }
 }

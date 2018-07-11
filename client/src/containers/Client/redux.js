@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { actionTypes } from './actions';
+import { stat } from 'fs';
 
 const initState = fromJS({
   currentNews: {},
@@ -10,7 +11,8 @@ const initState = fromJS({
   homeNewsList: {
     gongzuoList: [],
     tonggaoList: [],
-  }
+  },
+  carouselLittle: []
 })
 
 export default (state = initState, action) => {
@@ -27,6 +29,8 @@ export default (state = initState, action) => {
       return state.update('newsList', () => fromJS(action.newsList));
     case actionTypes.GET_HOME_NEWS_LIST:
       return state.update('homeNewsList', () => fromJS(action.homeNewsList));
+    case actionTypes.GET_CAROUSEL_LITTLE:
+      return state.update('carouselLittle', () => fromJS(action.carouselLittle));
     default: return state;
   }
 }

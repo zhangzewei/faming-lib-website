@@ -46,4 +46,41 @@ export default [
       }
     },
   },
+  {
+    path: '/carousel/littleList',
+    method: 'GET',
+    config: {
+      handler: controller.getCarsoul,
+      description: '获取所有小轮播图',
+      tags: ['api'],
+    },
+  },
+  {
+    path: '/carousel/little',
+    method: 'POST',
+    config: {
+      handler: controller.addCarousel,
+      description: '新增小轮播图配置',
+      tags: ['api'],
+      validate: {
+        payload: {
+          img: Joi.string().required(),
+        }
+      }
+    },
+  },
+  {
+    path: '/carousel/delete',
+    method: 'POST',
+    config: {
+      handler: controller.deleteCarousel,
+      description: '删除小轮播图',
+      tags: ['api'],
+      validate: {
+        payload: {
+          id: Joi.string().required(),
+        }
+      }
+    },
+  },
 ]

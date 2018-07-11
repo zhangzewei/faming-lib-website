@@ -15,6 +15,7 @@ import UserDetails from '../Users/detail';
 import Pictures from '../Pictures';
 import PicDetails from '../Pictures/detail';
 import MenuManager from '../MenuManager';
+import Carousel from '../Carousel';
 
 import './style.css';
 
@@ -100,6 +101,12 @@ class App extends Component {
             <span>菜单管理</span>
           </Link>
         </Menu.Item>
+        <Menu.Item key="carousel">
+          <Link to="/admin/carousel">
+            <Icon type="menu-unfold" />
+            <span>小轮播图管理</span>
+          </Link>
+        </Menu.Item>
       </Menu>
     );
   }
@@ -169,6 +176,7 @@ class App extends Component {
               <Route path='/admin/pictures' exact component={Pictures} />
               <Route path='/admin/picEdit' exact component={PicDetails} />
               <Route path='/admin/menuManager' exact component={MenuManager} />
+              <Route path='/admin/carousel' exact component={Carousel} />
               <Route component={NotMatch} />
             </Switch>
           </Content>
