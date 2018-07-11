@@ -1,34 +1,30 @@
-.imgSlid{
-    background: #fff;
+.imgSlid {
     height: 190px;
     position: relative;
+    padding: 0px 25px;
 }
-.imgListBox{
-    height: 190px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    display: inline-block;
-    padding: 5px 0;
-    width: 97%;
-    padding-left: 25px;
 
+.imgSlid .slick-slide {
+    text-align: center;
+    height: 190px;
+    line-height: 190px;
+    overflow: hidden;
 }
+
 li.ImgSlid-li {
     display: inline-block;
     width: 245px;
-    margin-left: 27px;
+    padding: 0 5px;
 }
-.slideButton {
-    background: #655d5d;
-    height: 100%;
-    display: inline-block;
-    position: absolute;
-    width: 3%;
-    line-height: 190px;
-    text-align: center;
-}
+
 li.ImgSlid-li img {
-    height: 180px;
-    width: 245px;
+    height: 190px;
+    width: 100%;
+}
+
+.imgSlid .slick-prev,
+.imgSlid .slick-next {
+    width: 25px;
+    height: 100%;
+    background: rgba(0,0,0,0.7)
 }

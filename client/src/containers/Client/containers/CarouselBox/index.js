@@ -32,11 +32,11 @@ export default class CarouselBox extends Component {
                             <p className="carousel-title">{l.articleTitle}</p>
                         </Link>
                     ) : (
-                        <div>
-                            <img src={l.img} alt={l.articleTitle} />,
+                            <div>
+                                <img src={l.img} alt={l.articleTitle} />,
                             <p className="carousel-title">{l.articleTitle}</p>
-                        </div>
-                    )
+                            </div>
+                        )
                 }
             </div>
         )

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import {Icon} from 'antd';
-
-
+import React, { Component } from 'react';
+import SlickCarousel from 'react-slick';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import './style.css';
 
 import Img1 from './img/kepu1.png'
@@ -11,54 +11,36 @@ import Img4 from './img/kepu1.png'
 
 export default class ImgSlid extends Component {
 
-   // 轮播js
-   Lunbo = (n)=>{
-    for (let i = 0; i < n.length; i++) {
-      const element = n[i];
-      if (i=n.length) {
-        element.imgUrl=n[0];
-        alert('轮播函数'+i);
-      
-      } else {
-        element.imgUrl=n[i+1];
-        alert('轮播函数'+i);
-      }
-      
-    }
+  genList = ls => ls.map((l, i) => (
+    <li className='ImgSlid-li' key={l.imgUrl}>
+      <img src={l.imgUrl} />
+    </li>
+  ));
+
+  render() {
+    const imgList = [
+      { imgUrl: Img1 },
+      { imgUrl: Img2 },
+      { imgUrl: Img3 },
+      { imgUrl: Img4 },
+      { imgUrl: Img3 },
+      { imgUrl: Img4 },
+      { imgUrl: Img3 },
+      { imgUrl: Img4 },
+    ];
+    const settings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4
+    };
+    return (
+      <div className='imgSlid'>
+        <SlickCarousel {...settings}>
+          {this.genList(imgList)}
+        </SlickCarousel>
+      </div>
+    )
   }
-
-    genList = ls => ls.map((l, i) => {
-        if (i<4) {
-            return (
-              <li className='ImgSlid-li' key={i}>
-                <img src={l.imgUrl}/>
-              </li> 
-            );
-          }
-    });
-
-
-    render() {
-     const imgList = [
-        {imgUrl:Img1,content:'荞麦的功效',link:'https://baike.baidu.com/item/%E8%8D%9E%E9%BA%A6/889827?fr=aladdin'},
-        {imgUrl:Img2,content:'荞麦的功效',link:'https://baike.baidu.com/item/%E8%8D%9E%E9%BA%A6/889827?fr=aladdin'},
-        {imgUrl:Img3,content:'荞麦的功效',link:'https://baike.baidu.com/item/%E8%8D%9E%E9%BA%A6/889827?fr=aladdin'},
-        {imgUrl:Img4,content:'荞麦的功效',link:'https://baike.baidu.com/item/%E8%8D%9E%E9%BA%A6/889827?fr=aladdin'},                  
-     ]
-        
-      return (
-       <div className='imgSlid'>
-          <div className='slide-left slideButton'>
-           <Icon type="notification"  style={{ fontSize: 23, color: '#d61c23' }}/>
-          </div>
-          <div className='imgListBox'>
-            {this.genList(imgList)}
-          </div>  
-          <div className='slide-right slideButton'>
-           <Icon type="notification"  style={{ fontSize: 23, color: '#d61c23' }}/>
-          </div>
-        </div>
-
-      )
-    }
-  }
+}
