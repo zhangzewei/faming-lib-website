@@ -27,6 +27,11 @@ Promise.all([
   // 轮播图库
   DB.indices.delete({
     index: 'menus',
+  }),
+
+  // 轮播图库
+  DB.indices.delete({
+    index: 'carousellittle',
   })
 ]).then().catch(e => console.log(e))
 
