@@ -24,7 +24,7 @@ Promise.all([
     index: 'carrousel',
   }),
   
-  // 轮播图库
+  // 菜单库
   DB.indices.delete({
     index: 'menus',
   }),

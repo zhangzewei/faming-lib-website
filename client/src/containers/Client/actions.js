@@ -75,6 +75,10 @@ export const getMenuConfig = () => async dipatch => {
       {
         name: '转载文章',
         link: '/secondPage/newsList/PopulationOfscienceMenu:zhuanzai',
+      },
+      {
+        name: '科普宣传',
+        link: '/secondPage/newsList/PopulationOfscienceMenu:kepu',
       }
     ];
     dipatch({
