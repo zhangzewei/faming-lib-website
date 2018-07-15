@@ -41,12 +41,7 @@
   border-bottom: 1px solid;
 }
 
-.ant-carousel .slick-dots li button{
-  width: 54px;
-  height: 6px;
-}
-
-.ant-carousel .slick-dots{
+.ant-carousel .slick-dots {
   padding: 15px 0;
   bottom: 0;
   list-style: none;
@@ -58,6 +53,12 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.slick-active li button{
-  background: rgb(211, 102, 29);
+.ant-carousel .slick-dots li button::before,
+.slick-dots li.slick-active button:before {
+  color: transparent !important;
+  opacity: 0 !important;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  width: 16px;
 }
